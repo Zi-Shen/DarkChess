@@ -1,0 +1,11 @@
+RED
+55
+55
+Ne0	Ne0	Ne0	Ne0	
+Ne0	Ne0	Ne0	Ne0	
+Ne0	Ne1	Ne0	Ne0	
+Bx1	Ne0	Bm1	Ne0	
+Rc1	Ne0	Bj1	Ne0	
+Rj1	Ne0	Ne0	Ne0	
+Rm1	Ne0	Ne0	Ne0	
+Ne0	Ne0	Ne0	Ne0	
