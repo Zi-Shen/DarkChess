@@ -38,9 +38,10 @@ public class OnlinePlayMode {
                 @Override
                 public void action() {
                     super.action();
-                    String old_str = chessboard.saveGame2Str();
+                    String old_str = chessboard.saveChessBoard2Str();
                     if (str.length()!=0 && !Objects.equals(old_str, str)) {
-                        chessboard.readGameFromStr(str);
+                        chessboard.loadChessBoardFromStr(str);
+                        chessboard.chessGame.add(str);
                         if (chessboard.getScoreOfBlack()>=60||chessboard.getScoreOfRed()>=60){
                             chessboard.clickController.gameOverAndAsk();
                         }
@@ -54,13 +55,6 @@ public class OnlinePlayMode {
     public void startReceive() {
         thread_rec = new Thread(receiver,"Receiver");
         thread_rec.start();
-    }
-    public void startSend() {
-        thread_sed = new Thread(sender,"Sender");
-        thread_sed.start();
-    }
-    public String getRes() {
-        return receiver.str;
     }
 
     public Chessboard getChessboard() {

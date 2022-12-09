@@ -11,7 +11,6 @@ import view.ChessGameFrame;
 import view.Chessboard;
 
 import javax.swing.*;
-import java.util.Objects;
 
 
 public class ClickController {
@@ -49,6 +48,7 @@ public class ClickController {
                 chessboard.swapChessComponents(first, squareComponent);
                 chessboard.clickController.swapPlayer();
                 sendMyCB();
+                chessboard.chessGame.add(chessboard.saveChessBoard2Str());
                 first.setSelected(false);
                 first = null;
                 if (chessboard.getScoreOfBlack() >= 60 || chessboard.getScoreOfRed() >= 60) {
@@ -74,6 +74,7 @@ public class ClickController {
             squareComponent.repaint();
             chessboard.clickController.swapPlayer();
             sendMyCB();
+            chessboard.chessGame.add(chessboard.saveChessBoard2Str());
 
             return false;
         }
@@ -103,7 +104,7 @@ public class ClickController {
 
     public void sendMyCB() {
         if (ChessGameFrame.isOnline) {
-            String str = chessboard.saveGame2Str();
+            String str = chessboard.saveChessBoard2Str();
             omode.send(str);
         }
     }

@@ -21,12 +21,12 @@ public class ChessGameFrame extends JFrame {
     private final int WIDTH;
     private final int HEIGHT;
     public final int CHESSBOARD_SIZE;
-    private GameController gameController;
+    //private GameController gameController;
     private static JLabel statusLabel;
     private static JLabel redScoreLabel;
     private static JLabel blackScoreLabel;
     public static boolean isOnline;
-    private Chessboard chessboard;
+    private final Chessboard chessboard;
     public ChessGameFrame(int width, int height) {
         setTitle("Dark Chess - 2022 CS109 Project"); //设置标题
         this.WIDTH = width;
@@ -57,6 +57,7 @@ public class ChessGameFrame extends JFrame {
         addLoadButton();
         addRestartButton();
         addThemeButton();
+        addUndoButton();
         addExitReminder();
     }
 
@@ -92,7 +93,7 @@ public class ChessGameFrame extends JFrame {
      * 在游戏窗体中添加棋盘
      */
     private void addChessboard() {
-        gameController = new GameController(chessboard);
+        //gameController = new GameController(chessboard);
         chessboard.setLocation(HEIGHT / 5, HEIGHT / 10);
         add(chessboard);
     }
@@ -126,30 +127,8 @@ public class ChessGameFrame extends JFrame {
         statusLabel.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(statusLabel);
     }
-    private JButton saveButton;
-    private JButton loadButton;
-    private JButton themeButton;
-    private JButton restartButton;
-    private void addSaveButton() {
-        saveButton = new JButton("Save Game");
-        saveButton.addActionListener((e) -> {
-            System.out.println("Click save button");
-            String name = JOptionPane.showInputDialog(null,
-                    "Please enter the game name:","Save Game",JOptionPane.WARNING_MESSAGE);
-            if (name.length()==0) {
-                JOptionPane.showMessageDialog(null,
-                        "Game name cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                chessboard.saveGame2File(name);
-            }
-        });
-        saveButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 120);
-        saveButton.setSize(150, 30);
-        saveButton.setFont(new Font("Rockwell", Font.BOLD, 16));
-        saveButton.setBackground(Color.WHITE);
-        saveButton.setForeground(Color.DARK_GRAY);
-        add(saveButton);
-    }
+
+    private final ArrayList<JButton> buttonList = new ArrayList<>();
 
     private void addScoreLabel() {
         redScoreLabel = new JLabel("RED's SCORE: 0");
@@ -158,8 +137,8 @@ public class ChessGameFrame extends JFrame {
         blackScoreLabel.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 40);
         redScoreLabel.setSize(200, 30);
         blackScoreLabel.setSize(200, 30);
-        redScoreLabel.setFont(new Font("Rockwell", Font.BOLD, 16));
-        blackScoreLabel.setFont(new Font("Rockwell", Font.BOLD, 16));
+        redScoreLabel.setFont(new Font("Rockwell", Font.BOLD, 18));
+        blackScoreLabel.setFont(new Font("Rockwell", Font.BOLD, 18));
         add(redScoreLabel);
         add(blackScoreLabel);
     }
@@ -177,21 +156,63 @@ public class ChessGameFrame extends JFrame {
                 if (userChoose == 0)
                 {
                     System.exit (0);
-                } else {
-                    return;
                 }
             }
         });
     }
 
+    private void addSaveButton() {
+        JButton saveButton = new JButton("Save Game");
+        saveButton.addActionListener((e) -> {
+            System.out.println("Click save button");
+            String name = JOptionPane.showInputDialog(null,
+                    "Please enter the game name:","Save Game",JOptionPane.WARNING_MESSAGE);
+            if (name.length()==0) {
+                JOptionPane.showMessageDialog(null,
+                        "Game name cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                chessboard.saveGame2File(name);
+            }
+        });
+        saveButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 160 + 80 * 0);
+        saveButton.setSize(150, 30);
+        saveButton.setFont(new Font("Rockwell", Font.BOLD, 16));
+        saveButton.setBackground(Color.WHITE);
+        saveButton.setForeground(Color.DARK_GRAY);
+        add(saveButton);
+        buttonList.add(saveButton);
+    }
+
+    private void addLoadButton() {
+        JButton loadButton = new JButton("Load Game");
+        loadButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 160 + 80 * 1);
+        loadButton.setSize(150, 30);
+        loadButton.setFont(new Font("Rockwell", Font.BOLD, 16));
+        loadButton.setForeground(Color.DARK_GRAY);
+        loadButton.setBackground(Color.WHITE);
+        add(loadButton);
+        buttonList.add(loadButton);
+
+        loadButton.addActionListener(e -> {
+            System.out.println("Click load");
+            String[] options = getFileListFromPath("gamedata\\");
+            String option =  (String)JOptionPane.showInputDialog(null,"Please choose a game","Load Game",JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+            chessboard.readGameFromFile(option);
+            ChessGameFrame.getStatusLabel().setText(String.format("%s's TURN", chessboard.getCurrentColor().getName()));
+            ChessGameFrame.getRedScoreLabel().setText(String.format("RED's SCORE: %d", chessboard.getScoreOfRed()));
+            ChessGameFrame.getBlackScoreLabel().setText(String.format("BLACK's SCORE: %d", chessboard.getScoreOfBlack()));
+        });
+    }
+
     private void addRestartButton() {
-        restartButton = new JButton("Restart");
-        restartButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 240);
+        JButton restartButton = new JButton("Restart");
+        restartButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 160 + 80 * 2);
         restartButton.setSize(150, 30);
         restartButton.setFont(new Font("Rockwell", Font.BOLD, 16));
         restartButton.setBackground(Color.WHITE);
         restartButton.setForeground(Color.DARK_GRAY);
         add(restartButton);
+        buttonList.add(restartButton);
 
         restartButton.addActionListener(e -> {
             System.out.println("Click restart");
@@ -200,7 +221,31 @@ public class ChessGameFrame extends JFrame {
         });
     }
 
-    public static String[] listDirs(String path) {
+    private void addUndoButton() {
+        JButton undoButton = new JButton("Undo 1 step");
+        undoButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 160 + 80 * 3);
+        undoButton.setSize(150, 30);
+        undoButton.setFont(new Font("Rockwell", Font.BOLD, 16));
+        undoButton.setForeground(Color.DARK_GRAY);
+        undoButton.setBackground(Color.WHITE);
+        add(undoButton);
+        buttonList.add(undoButton);
+        undoButton.addActionListener((e) -> chessboard.undo1step());
+    }
+
+    private void addThemeButton() {
+        JButton themeButton = new JButton("Theme Color");
+        themeButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 160 + 80 * 4);
+        themeButton.setSize(150, 30);
+        themeButton.setFont(new Font("Rockwell", Font.BOLD, 16));
+        themeButton.setForeground(Color.DARK_GRAY);
+        themeButton.setBackground(Color.WHITE);
+        add(themeButton);
+        buttonList.add(themeButton);
+        themeButton.addActionListener((e) -> askAndSetTheme());
+    }
+
+    public static String[] getFileListFromPath(String path) {
         // 创建file
         File dir = new File(path);
         // 获取当前目录下的文件列表
@@ -212,7 +257,7 @@ public class ChessGameFrame extends JFrame {
             for (File file : files) {
                 // 如果数组里面是文件
                 String fileName = file.getName();
-                if (file.isFile() && Objects.equals("txt", fileName.substring(fileName.length() - 3, fileName.length()))) {//则输出文件名
+                if (file.isFile() && Objects.equals("txt", fileName.substring(fileName.length() - 3))) {//则输出文件名
                     validNameList.add(fileName.substring(0, fileName.length()-4));
                 }
             }
@@ -227,41 +272,10 @@ public class ChessGameFrame extends JFrame {
         }
         return validNames;
     }
-    private void addLoadButton() {
-        loadButton = new JButton("Load");
-        loadButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 360);
-        loadButton.setSize(150, 30);
-        loadButton.setFont(new Font("Rockwell", Font.BOLD, 16));
-        loadButton.setForeground(Color.DARK_GRAY);
-        loadButton.setBackground(Color.WHITE);
-        add(loadButton);
 
-        loadButton.addActionListener(e -> {
-            System.out.println("Click load");
-            String[] options = listDirs("gamedata\\");
-            String option =  (String)JOptionPane.showInputDialog(null,"Please choose a game","Load Game",JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
-            chessboard.readGameFromFile(option);
-            ChessGameFrame.getStatusLabel().setText(String.format("%s's TURN", chessboard.getCurrentColor().getName()));
-            ChessGameFrame.getRedScoreLabel().setText(String.format("RED's SCORE: %d", chessboard.getScoreOfRed()));
-            ChessGameFrame.getBlackScoreLabel().setText(String.format("BLACK's SCORE: %d", chessboard.getScoreOfBlack()));
-        });
-    }
-
-    private void addThemeButton() {
-        themeButton = new JButton("Theme Color");
-        themeButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 480);
-        themeButton.setSize(150, 30);
-        themeButton.setFont(new Font("Rockwell", Font.BOLD, 16));
-        themeButton.setForeground(Color.DARK_GRAY);
-        themeButton.setBackground(Color.WHITE);
-        add(themeButton);
-        themeButton.addActionListener((e) -> {
-            askAndSetTheme();
-        });
-    }
     public void askAndSetTheme() {
         String[] options = ThemesColor.avalableTheme();
-        String userChoose = (String) JOptionPane.showInputDialog(this,"Choose a theme to change:","Change Theme",JOptionPane.QUESTION_MESSAGE,null,options,options[0]);;
+        String userChoose = (String) JOptionPane.showInputDialog(this,"Choose a theme to change:","Change Theme",JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
         for (String option : options) {
             if (option.equals(userChoose)) {
                 ThemesColor.setThemeColor(option);
@@ -270,27 +284,19 @@ public class ChessGameFrame extends JFrame {
                     getStatusLabel().setForeground(Color.BLACK);
                     getBlackScoreLabel().setForeground(Color.BLACK);
                     getRedScoreLabel().setForeground(Color.BLACK);
-                    saveButton.setBackground(Color.WHITE);
-                    saveButton.setForeground(Color.DARK_GRAY);
-                    themeButton.setBackground(Color.WHITE);
-                    themeButton.setForeground(Color.DARK_GRAY);
-                    loadButton.setBackground(Color.WHITE);
-                    loadButton.setForeground(Color.DARK_GRAY);
-                    restartButton.setBackground(Color.WHITE);
-                    restartButton.setForeground(Color.DARK_GRAY);
+                    for (JButton button : buttonList) {
+                        button.setBackground(Color.WHITE);
+                        button.setForeground(Color.DARK_GRAY);
+                    }
                 } else {
                     this.getContentPane().setBackground(Color.BLACK);
                     getStatusLabel().setForeground(Color.WHITE);
                     getRedScoreLabel().setForeground(Color.WHITE);
                     getBlackScoreLabel().setForeground(Color.WHITE);
-                    saveButton.setBackground(Color.DARK_GRAY);
-                    saveButton.setForeground(Color.WHITE);
-                    themeButton.setBackground(Color.DARK_GRAY);
-                    themeButton.setForeground(Color.WHITE);
-                    loadButton.setBackground(Color.DARK_GRAY);
-                    loadButton.setForeground(Color.WHITE);
-                    restartButton.setBackground(Color.DARK_GRAY);
-                    restartButton.setForeground(Color.WHITE);
+                    for (JButton button : buttonList) {
+                        button.setBackground(Color.DARK_GRAY);
+                        button.setForeground(Color.WHITE);
+                    }
                 }
             }
         }

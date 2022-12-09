@@ -27,9 +27,9 @@ public class Chessboard extends JComponent{
         scoreOfBlack = 0;
         scoreOfRed = 0;
         initAllChessOnBoard();
-        //saveGame("data");
-        //readGame("data");
     }
+    // chessGame 用于记录所有的当前游戏的行棋步骤，执行initAllChessOnBoard时会初始化并且记录初始棋盘状态。
+    public ArrayList<String> chessGame;
     private static final int ROW_SIZE = 8;
     private static final int COL_SIZE = 4;
     private final SquareComponent[][] squareComponents = new SquareComponent[ROW_SIZE][COL_SIZE];
@@ -85,7 +85,6 @@ public class Chessboard extends JComponent{
 
     /**
      * 将SquareComponent 放置在 ChessBoard上。里面包含移除原有的component及放置新的component
-     * @param squareComponent
      */
     public void putChessOnBoard(SquareComponent squareComponent) {
         int row = squareComponent.getChessboardPoint().getX(), col = squareComponent.getChessboardPoint().getY();
@@ -97,8 +96,8 @@ public class Chessboard extends JComponent{
 
     /**
      * 交换chess1 chess2的位置
-     * @param chess1
-     * @param chess2
+     * @param chess1 吃棋动作发起方
+     * @param chess2 被吃的目标
      */
     public void swapChessComponents(SquareComponent chess1, SquareComponent chess2) {
         // Note that chess1 has higher priority, 'destroys' chess2 if exists.
@@ -195,11 +194,14 @@ public class Chessboard extends JComponent{
             counter += 1;
         }
         clickController.sendMyCB();
+        chessGame = new ArrayList<>();
+        chessGame.add(saveChessBoard2Str());
+        System.out.printf("Game is initialized to: %s", chessGame.get(0));
     }
 
     /**
      * 绘制棋盘格子
-     * @param g
+     * @param g 棋盘
      */
     @Override
     public void paintComponent(Graphics g) {
@@ -212,7 +214,6 @@ public class Chessboard extends JComponent{
      * 将棋盘上行列坐标映射成Swing组件的Point
      * @param row 棋盘上的行
      * @param col 棋盘上的列
-     * @return
      */
     private Point calculatePoint(int row, int col) {
         return new Point(col * CHESS_SIZE + 3, row * CHESS_SIZE + 3);
@@ -220,113 +221,44 @@ public class Chessboard extends JComponent{
 
     public void readGameFromFile(String gameName) {
         //将数组从文件中读取出来
-        BufferedReader bufferedReader = null;
+        BufferedReader bufferedReader;
         //为保存的数组分配空间
-        String[][] cbData = new String[ROW_SIZE][COL_SIZE];;
+        chessGame = new ArrayList<>();
         try {
-            InputStreamReader inputStreamReader = new InputStreamReader(new FileInputStream(String.format("gamedata\\%s.txt",gameName)));
+            InputStreamReader inputStreamReader = new InputStreamReader(
+                    new FileInputStream(String.format("gamedata\\%s.txt",gameName)));
             bufferedReader = new BufferedReader(inputStreamReader);
             String line;
-            int i=0;
             //按行读取
-            while((line = bufferedReader.readLine() )!= null){
+            while((line = bufferedReader.readLine() )!= null && line.length()!=0){
                 //将按行读取的字符串按空格分割，得到一个string数组
-                String[] strings = line.split("\\t");
+                //String[] strings = line.split("\\t");
                 //依次转换为int类型存入到分配好空间的数组中
-                if (i>2) {
-                    System.arraycopy(strings, 0, cbData[i-3], 0, strings.length);
-                } else if (i==0) {
-                    if (Objects.equals(strings[0], "BLACK")) {setCurrentColor(ChessColor.BLACK);}
-                    else if (Objects.equals(strings[0], "RED")) {setCurrentColor(ChessColor.RED);}
-                } else if (i==1) {setScoreOfBlack(Integer.parseInt(strings[0]));
-                } else if (i==2) {setScoreOfRed(Integer.parseInt(strings[0]));}
-                //行数加1
-                i++;
+                chessGame.add(line);
             }
-            for (int j = 0; j < ROW_SIZE; j++) {
-                for (int k = 0; k < COL_SIZE; k++) {
-                    ChessColor color;
-                    if (Objects.equals(cbData[j][k].charAt(0), 'B')) {
-                        color = ChessColor.BLACK;
-                    } else{
-                        color = ChessColor.RED;
-                    }
-                    boolean isRev;
-                    isRev = !Objects.equals(cbData[j][k].charAt(2), '0');
-                    SquareComponent squareComponent = new EmptySlotComponent(new ChessboardPoint(j,k), clickController, CHESS_SIZE);
-                    switch (cbData[j][k].charAt(1)) {
-                        case 'c' -> {
-                            squareComponent = new ChariotChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                            squareComponent.setRevealed(isRev);
-                        }
-                        case 'm' -> {
-                            squareComponent = new HorseChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                            squareComponent.setRevealed(isRev);
-                        }
-                        case 'x' -> {
-                            squareComponent = new MinisterChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                            squareComponent.setRevealed(isRev);
-                        }
-                        case 's' -> {
-                            squareComponent = new AdvisorChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                            squareComponent.setRevealed(isRev);
-                        }
-                        case 'j' -> {
-                            squareComponent = new GeneralChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                            squareComponent.setRevealed(isRev);
-                        }
-                        case 'z' -> {
-                            squareComponent = new SoldierChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                            squareComponent.setRevealed(isRev);
-                        }
-                        case 'p' -> {
-                            squareComponent = new CannonChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                            squareComponent.setRevealed(isRev);
-                        }
-                    }
-                    squareComponent.setVisible(true);
-                    putChessOnBoard(squareComponent);
-                    squareComponent.repaint();
-                }
-            }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-        updateFrameLabel();
+        loadChessBoardFromStr(chessGame.get(chessGame.size()-1));
         clickController.sendMyCB();
     }
 
     public void saveGame2File(String gameName) {
         FileWriter out;
         File file = new File(String.format("gamedata\\%s.txt",gameName));
-        String[][] cbCodes = new String[ROW_SIZE][COL_SIZE];
-        for (int i = 0; i < squareComponents.length; i++) {
-            for (int j = 0; j < squareComponents[i].length; j++) {
-                int isRevealed10;
-                if (squareComponents[i][j].isRevealed()) {isRevealed10=1;}
-                else {isRevealed10=0;}
-                cbCodes[i][j] = String.format("%s%s%d",squareComponents[i][j].getChessColor().toString().charAt(0),
-                        squareComponents[i][j].getCode(),isRevealed10);
-            }
-        }
         try {
             out = new FileWriter(file);
-            out.write(currentColor.toString()+"\n");
-            out.write(String.format("%d\n%d\n",getScoreOfBlack(),getScoreOfRed()));
-            for (String[] cbCodeRow : cbCodes) {
-                for (String s : cbCodeRow) {
-                    out.write(s + "\t");
-                }
-                out.write("\r\n");
+            for (String s : chessGame) {
+                out.write(s + "\n");
             }
+            out.write("\r\n");
             out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void readGameFromStr(String str) {
+    public void loadChessBoardFromStr(String str) {
         if (str.charAt(0)=='B') {setCurrentColor(ChessColor.BLACK);}
         else {setCurrentColor(ChessColor.RED);}
         setScoreOfBlack(Integer.parseInt(str.substring(1,3)));
@@ -383,9 +315,9 @@ public class Chessboard extends JComponent{
         ChessGameFrame.getRedScoreLabel().setText(String.format("RED's SCORE: %d", this.getScoreOfRed()));
         ChessGameFrame.getBlackScoreLabel().setText(String.format("BLACK's SCORE: %d", this.getScoreOfBlack()));
     }
-    public String saveGame2Str() {
-        StringBuilder str = new StringBuilder(new String());
-        str.append(getCurrentColor().toString().substring(0, 1));
+    public String saveChessBoard2Str() {
+        StringBuilder str = new StringBuilder();
+        str.append(getCurrentColor().toString().charAt(0));
         if (getScoreOfBlack()>=10) {
             str.append(String.format("%d", getScoreOfBlack()));
         } else {
@@ -408,5 +340,17 @@ public class Chessboard extends JComponent{
             }
         }
         return str.toString();
+    }
+    public void undo1step() {
+        if (chessGame.size()>1) {
+            chessGame.remove(chessGame.size()-1);
+            loadChessBoardFromStr(chessGame.get(chessGame.size()-1));
+            clickController.sendMyCB();
+        } else {
+            JOptionPane.showMessageDialog(
+                    null, "Cannot undo on a initial state.","Warning",
+                    JOptionPane.WARNING_MESSAGE
+            );
+        }
     }
 }
