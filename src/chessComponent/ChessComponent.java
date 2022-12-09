@@ -16,14 +16,9 @@ public class ChessComponent extends SquareComponent{
     protected ChessComponent(ChessboardPoint chessboardPoint, ChessColor chessColor, ClickController clickController, int size) {
         super(chessboardPoint, chessColor, clickController, size);
     }
-
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponents(g);
-        System.out.printf("repaint chess [%d,%d]\n", this.getChessboardPoint().getX(), this.getChessboardPoint().getY());
-        g.setColor(ThemesColor.chessBoardColor);
-        g.fillRect(1, 1, this.getWidth() - 2, this.getHeight() - 2);
-
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         g.setColor(ThemesColor.chessPieceColor);
         g.fillOval(spacingLength, spacingLength, this.getWidth() - 2 * spacingLength, this.getHeight() - 2 * spacingLength);
         //绘制棋子边框
@@ -59,6 +54,11 @@ public class ChessComponent extends SquareComponent{
                 g.setFont(CHESS_FONT);
                 g.drawString(this.name, this.getWidth() / 4, this.getHeight() * 2 / 3);
             }
+//            if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+//                g.setColor(Color.RED);
+//                g.setFont(new Font("黑体", Font.BOLD, 10));
+//                g.drawString(String.valueOf(this.howManyDead), this.getWidth() / 4, this.getHeight() * 2 / 3);
+//            }
         }
     }
 

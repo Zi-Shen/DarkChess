@@ -31,7 +31,7 @@ public class Chessboard extends JComponent{
     // chessGame 用于记录所有的当前游戏的行棋步骤，执行initAllChessOnBoard时会初始化并且记录初始棋盘状态。
     public ArrayList<String> chessGame;
     private static final int ROW_SIZE = 8;
-    private static final int COL_SIZE = 4;
+    private static final int COL_SIZE = 4 + 2;
     private final SquareComponent[][] squareComponents = new SquareComponent[ROW_SIZE][COL_SIZE];
     //todo: you can change the initial player
     private ChessColor currentColor = ChessColor.BLACK;
@@ -93,17 +93,472 @@ public class Chessboard extends JComponent{
         }
         add(squareComponents[row][col] = squareComponent);
     }
+    private final int[] deadNumOfBlack = new int[7];
+    private final int[] deadNumOfRed = new int[7];
+
+    // 更新死掉的棋子并且绘制
+    private void updateDeadChess(ChessColor color, int index) {
+        if (index == 0) {
+            SquareComponent deadChess;
+            if (color == ChessColor.RED){
+                deadChess = new GeneralChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
+                    @Override
+                    public void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        g.setColor(Color.RED);
+                        g.fillOval(5,5,15,15);
+                        g.setColor(Color.WHITE);
+                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
+                    }
+                };
+            } else {
+                deadChess = new GeneralChessComponent(new ChessboardPoint(7 - index,5), color, clickController, CHESS_SIZE) {
+                    @Override
+                    public void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        g.setColor(Color.RED);
+                        g.fillOval(5,5,15,15);
+                        g.setColor(Color.WHITE);
+                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
+                    }
+                };
+            }
+            deadChess.setRevealed(true);
+            putChessOnBoard(deadChess);
+            deadChess.repaint();
+        }
+        if (index == 1) {
+            SquareComponent deadChess;
+            if (color == ChessColor.RED){
+                deadChess = new AdvisorChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
+                    @Override
+                    public void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        g.setColor(Color.RED);
+                        g.fillOval(5,5,15,15);
+                        g.setColor(Color.WHITE);
+                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
+                    }
+                };
+            } else {
+                deadChess = new AdvisorChessComponent(new ChessboardPoint(7 - index,5), color, clickController, CHESS_SIZE) {
+                    @Override
+                    public void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        g.setColor(Color.RED);
+                        g.fillOval(5,5,15,15);
+                        g.setColor(Color.WHITE);
+                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
+                    }
+                };
+            }
+            deadChess.setRevealed(true);
+            putChessOnBoard(deadChess);
+            deadChess.repaint();
+        }
+        if (index == 2) {
+            SquareComponent deadChess;
+            if (color == ChessColor.RED){
+                deadChess = new MinisterChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
+                    @Override
+                    public void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        g.setColor(Color.RED);
+                        g.fillOval(5,5,15,15);
+                        g.setColor(Color.WHITE);
+                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
+                    }
+                };
+            } else {
+                deadChess = new MinisterChessComponent(new ChessboardPoint(7 - index,5), color, clickController, CHESS_SIZE) {
+                    @Override
+                    public void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        g.setColor(Color.RED);
+                        g.fillOval(5,5,15,15);
+                        g.setColor(Color.WHITE);
+                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
+                    }
+                };
+            }
+            deadChess.setRevealed(true);
+            putChessOnBoard(deadChess);
+            deadChess.repaint();
+        }
+        if (index == 3) {
+            SquareComponent deadChess;
+            if (color == ChessColor.RED){
+                deadChess = new ChariotChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
+                    @Override
+                    public void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        g.setColor(Color.RED);
+                        g.fillOval(5,5,15,15);
+                        g.setColor(Color.WHITE);
+                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
+                    }
+                };
+            } else {
+                deadChess = new ChariotChessComponent(new ChessboardPoint(7 - index,5), color, clickController, CHESS_SIZE) {
+                    @Override
+                    public void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        g.setColor(Color.RED);
+                        g.fillOval(5,5,15,15);
+                        g.setColor(Color.WHITE);
+                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
+                    }
+                };
+            }
+            deadChess.setRevealed(true);
+            putChessOnBoard(deadChess);
+            deadChess.repaint();
+        }
+        if (index == 4) {
+            SquareComponent deadChess;
+            if (color == ChessColor.RED){
+                deadChess = new HorseChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
+                    @Override
+                    public void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        g.setColor(Color.RED);
+                        g.fillOval(5,5,15,15);
+                        g.setColor(Color.WHITE);
+                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
+                    }
+                };
+            } else {
+                deadChess = new HorseChessComponent(new ChessboardPoint(7 - index,5), color, clickController, CHESS_SIZE) {
+                    @Override
+                    public void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        g.setColor(Color.RED);
+                        g.fillOval(5,5,15,15);
+                        g.setColor(Color.WHITE);
+                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
+                    }
+                };
+            }
+            deadChess.setRevealed(true);
+            putChessOnBoard(deadChess);
+            deadChess.repaint();
+        }
+        if (index == 5) {
+            SquareComponent deadChess;
+            if (color == ChessColor.RED){
+                deadChess = new CannonChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
+                    @Override
+                    public void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        g.setColor(Color.RED);
+                        g.fillOval(5,5,15,15);
+                        g.setColor(Color.WHITE);
+                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
+                    }
+                };
+            } else {
+                deadChess = new CannonChessComponent(new ChessboardPoint(7 - index,5), color, clickController, CHESS_SIZE) {
+                    @Override
+                    public void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        g.setColor(Color.RED);
+                        g.fillOval(5,5,15,15);
+                        g.setColor(Color.WHITE);
+                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
+                    }
+                };
+            }
+            deadChess.setRevealed(true);
+            putChessOnBoard(deadChess);
+            deadChess.repaint();
+        }
+        if (index == 6) {
+            SquareComponent deadChess;
+            if (color == ChessColor.RED){
+                deadChess = new SoldierChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
+                    @Override
+                    public void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        g.setColor(Color.RED);
+                        g.fillOval(5,5,15,15);
+                        g.setColor(Color.WHITE);
+                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
+                    }
+                };
+            } else {
+                deadChess = new SoldierChessComponent(new ChessboardPoint(7 - index,5), color, clickController, CHESS_SIZE) {
+                    @Override
+                    public void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        g.setColor(Color.RED);
+                        g.fillOval(5,5,15,15);
+                        g.setColor(Color.WHITE);
+                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
+                    }
+                };
+            }
+            deadChess.setRevealed(true);
+            putChessOnBoard(deadChess);
+            deadChess.repaint();
+        }
+    }
+    private void upDateDeadChessByKilling(SquareComponent chess2) {
+        ChessComponent deadChess;
+        if (chess2 instanceof GeneralChessComponent) {
+            if (chess2.getChessColor() == ChessColor.RED) {
+                deadNumOfRed[0] += 1;
+                deadChess = new GeneralChessComponent(new ChessboardPoint(0, 0), ChessColor.RED, clickController, CHESS_SIZE){
+                    @Override
+                    public void paintComponent(Graphics g){
+                        super.paintComponent(g);
+                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                            g.setColor(Color.RED);
+                            g.fillOval(5,5,15,15);
+                            g.setColor(Color.WHITE);
+                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            g.drawString(String.valueOf(deadNumOfRed[0]), 10,16);
+                        }
+                    }
+                };
+            } else {
+                deadNumOfBlack[0] += 1;
+                deadChess = new GeneralChessComponent(new ChessboardPoint(7, 5), ChessColor.BLACK, clickController, CHESS_SIZE){
+                    @Override
+                    public void paintComponent(Graphics g){
+                        super.paintComponent(g);
+                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                            g.setColor(Color.RED);
+                            g.fillOval(5,5,15,15);
+                            g.setColor(Color.WHITE);
+                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            g.drawString(String.valueOf(deadNumOfBlack[0]), 10,16);
+                        }
+                    }
+                };
+            }
+        } else if (chess2 instanceof AdvisorChessComponent) {
+            if (chess2.getChessColor() == ChessColor.RED) {
+                deadNumOfRed[1] += 1;
+                deadChess = new AdvisorChessComponent(new ChessboardPoint(0+1, 0), ChessColor.RED, clickController, CHESS_SIZE){
+                    @Override
+                    public void paintComponent(Graphics g){
+                        super.paintComponent(g);
+                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                            g.setColor(Color.RED);
+                            g.fillOval(5,5,15,15);
+                            g.setColor(Color.WHITE);
+                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            g.drawString(String.valueOf(deadNumOfRed[1]), 10,16);
+                        }
+                    }
+                };
+            } else {
+                deadNumOfBlack[1] += 1;
+                deadChess = new AdvisorChessComponent(new ChessboardPoint(7-1, 5), ChessColor.BLACK, clickController, CHESS_SIZE){
+                    @Override
+                    public void paintComponent(Graphics g){
+                        super.paintComponent(g);
+                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                            g.setColor(Color.RED);
+                            g.fillOval(5,5,15,15);
+                            g.setColor(Color.WHITE);
+                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            g.drawString(String.valueOf(deadNumOfBlack[1]), 10,16);
+                        }
+                    }
+                };
+            }
+        } else if (chess2 instanceof MinisterChessComponent) {
+            if (chess2.getChessColor() == ChessColor.RED) {
+                deadNumOfRed[2] += 1;
+                deadChess = new MinisterChessComponent(new ChessboardPoint(0+2, 0), ChessColor.RED, clickController, CHESS_SIZE){
+                    @Override
+                    public void paintComponent(Graphics g){
+                        super.paintComponent(g);
+                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                            g.setColor(Color.RED);
+                            g.fillOval(5,5,15,15);
+                            g.setColor(Color.WHITE);
+                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            g.drawString(String.valueOf(deadNumOfRed[2]), 10,16);
+                        }
+                    }
+                };
+            } else {
+                deadNumOfBlack[2] += 1;
+                deadChess = new MinisterChessComponent(new ChessboardPoint(7-2, 5), ChessColor.BLACK, clickController, CHESS_SIZE){
+                    @Override
+                    public void paintComponent(Graphics g){
+                        super.paintComponent(g);
+                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                            g.setColor(Color.RED);
+                            g.fillOval(5,5,15,15);
+                            g.setColor(Color.WHITE);
+                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            g.drawString(String.valueOf(deadNumOfBlack[2]), 10,16);
+                        }
+                    }
+                };
+            }
+        } else if (chess2 instanceof ChariotChessComponent) {
+            if (chess2.getChessColor() == ChessColor.RED) {
+                deadNumOfRed[3] += 1;
+                deadChess = new ChariotChessComponent(new ChessboardPoint(0+3, 0), ChessColor.RED, clickController, CHESS_SIZE){
+                    @Override
+                    public void paintComponent(Graphics g){
+                        super.paintComponent(g);
+                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                            g.setColor(Color.RED);
+                            g.fillOval(5,5,15,15);
+                            g.setColor(Color.WHITE);
+                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            g.drawString(String.valueOf(deadNumOfRed[3]), 10,16);
+                        }
+                    }
+                };
+            } else {
+                deadNumOfBlack[3] += 1;
+                deadChess = new ChariotChessComponent(new ChessboardPoint(7-3, 5), ChessColor.BLACK, clickController, CHESS_SIZE){
+                    @Override
+                    public void paintComponent(Graphics g){
+                        super.paintComponent(g);
+                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                            g.setColor(Color.RED);
+                            g.fillOval(5,5,15,15);
+                            g.setColor(Color.WHITE);
+                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            g.drawString(String.valueOf(deadNumOfBlack[3]), 10,16);
+                        }
+                    }
+                };
+            }
+        } else if (chess2 instanceof HorseChessComponent) {
+            if (chess2.getChessColor() == ChessColor.RED) {
+                deadNumOfRed[4] += 1;
+                deadChess = new HorseChessComponent(new ChessboardPoint(0 + 4, 0), ChessColor.RED, clickController, CHESS_SIZE){
+                    @Override
+                    public void paintComponent(Graphics g){
+                        super.paintComponent(g);
+                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                            g.setColor(Color.RED);
+                            g.fillOval(5,5,15,15);
+                            g.setColor(Color.WHITE);
+                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            g.drawString(String.valueOf(deadNumOfRed[4]), 10,16);
+                        }
+                    }
+                };
+            } else {
+                deadNumOfBlack[4] += 1;
+                deadChess = new HorseChessComponent(new ChessboardPoint(7 - 4, 5), ChessColor.BLACK, clickController, CHESS_SIZE){
+                    @Override
+                    public void paintComponent(Graphics g){
+                        super.paintComponent(g);
+                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                            g.setColor(Color.RED);
+                            g.fillOval(5,5,15,15);
+                            g.setColor(Color.WHITE);
+                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            g.drawString(String.valueOf(deadNumOfBlack[4]), 10,16);
+                        }
+                    }
+                };
+            }
+        } else if (chess2 instanceof CannonChessComponent) {
+            if (chess2.getChessColor() == ChessColor.RED) {
+                deadNumOfRed[5] += 1;
+                deadChess = new CannonChessComponent(new ChessboardPoint(0 + 5, 0), ChessColor.RED, clickController, CHESS_SIZE){
+                    @Override
+                    public void paintComponent(Graphics g){
+                        super.paintComponent(g);
+                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                            g.setColor(Color.RED);
+                            g.fillOval(5,5,15,15);
+                            g.setColor(Color.WHITE);
+                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            g.drawString(String.valueOf(deadNumOfRed[5]), 10,16);
+                        }
+                    }
+                };
+            } else {
+                deadNumOfBlack[5] += 1;
+                deadChess = new CannonChessComponent(new ChessboardPoint(7 - 5, 5), ChessColor.BLACK, clickController, CHESS_SIZE){
+                    @Override
+                    public void paintComponent(Graphics g){
+                        super.paintComponent(g);
+                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                            g.setColor(Color.RED);
+                            g.fillOval(5,5,15,15);
+                            g.setColor(Color.WHITE);
+                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            g.drawString(String.valueOf(deadNumOfBlack[5]), 10,16);
+                        }
+                    }
+                };
+            }
+        } else {
+            if (chess2.getChessColor() == ChessColor.RED) {
+                deadNumOfRed[6] += 1;
+                deadChess = new SoldierChessComponent(new ChessboardPoint(0 + 6, 0), ChessColor.RED, clickController, CHESS_SIZE){
+                    @Override
+                    public void paintComponent(Graphics g){
+                        super.paintComponent(g);
+                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                            g.setColor(Color.RED);
+                            g.fillOval(5,5,15,15);
+                            g.setColor(Color.WHITE);
+                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            g.drawString(String.valueOf(deadNumOfRed[6]), 10,16);
+                        }
+                    }
+                };
+            } else {
+                deadNumOfBlack[6] += 1;
+                deadChess = new SoldierChessComponent(new ChessboardPoint(7 - 6, 5), ChessColor.BLACK, clickController, CHESS_SIZE){
+                    @Override
+                    public void paintComponent(Graphics g){
+                        super.paintComponent(g);
+                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                            g.setColor(Color.RED);
+                            g.fillOval(5,5,15,15);
+                            g.setColor(Color.WHITE);
+                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            g.drawString(String.valueOf(deadNumOfBlack[6]), 10,16);
+                        }
+                    }
+                };
+            }
+        }
+        deadChess.setRevealed(true);
+        putChessOnBoard(deadChess);
+        deadChess.repaint();
+    }
 
     /**
      * 交换chess1 chess2的位置
      * @param chess1 吃棋动作发起方
      * @param chess2 被吃的目标
      */
-    public void swapChessComponents(SquareComponent chess1, SquareComponent chess2) {
+    public void eatChessComponents(SquareComponent chess1, SquareComponent chess2) {
         // Note that chess1 has higher priority, 'destroys' chess2 if exists.
         if (!(chess2 instanceof EmptySlotComponent)) {
             remove(chess2);
             addScoreByEat(chess2);
+            upDateDeadChessByKilling(chess2);
             add(chess2 = new EmptySlotComponent(chess2.getChessboardPoint(), clickController, CHESS_SIZE));
         }
         chess1.swapLocation(chess2);
@@ -149,13 +604,17 @@ public class Chessboard extends JComponent{
     }
     //FIXME:   Initialize chessboard.
     public void initAllChessOnBoard() {
+        for (int i = 0; i < 7; i++) {
+            deadNumOfRed[i] = 0;
+            deadNumOfBlack[i] = 0;
+        }
         scoreOfBlack = 0;
         scoreOfRed = 0;
         currentColor = ChessColor.BLACK;
-        int[] elements_index = arange(ROW_SIZE*COL_SIZE);
+        int[] elements_index = arange(4*8);
         int[] random_index = indexShuffle(elements_index);
         int counter = 0;
-        int n_chess4one = ROW_SIZE*COL_SIZE/2;
+        int n_chess4one = 4*8/2;
         int n_soldiers = 5;
         int n_chariots = 2;
         int n_cannons = 2;
@@ -164,8 +623,8 @@ public class Chessboard extends JComponent{
         int n_scholars = 2;
         int n_general = 1;
         for (int index : random_index) {
-            int i = index / COL_SIZE;
-            int j = index % COL_SIZE;
+            int i = index / 4;
+            int j = 1 + index % 4;
             ChessColor color;
             if (counter < n_chess4one) {
                 color = ChessColor.RED;
@@ -173,17 +632,17 @@ public class Chessboard extends JComponent{
                 color = ChessColor.BLACK;
             }
             SquareComponent squareComponent;
-            if (counter%n_chess4one < n_soldiers) {
+            if (counter % n_chess4one < n_soldiers) {
                 squareComponent = new SoldierChessComponent(new ChessboardPoint(i, j), color, clickController, CHESS_SIZE);
-            } else if (counter%n_chess4one - n_soldiers < n_chariots){
+            } else if (counter % n_chess4one - n_soldiers < n_chariots) {
                 squareComponent = new ChariotChessComponent(new ChessboardPoint(i, j), color, clickController, CHESS_SIZE);
-            } else if (counter%n_chess4one - n_soldiers - n_chariots < n_cannons) {
+            } else if (counter % n_chess4one - n_soldiers - n_chariots < n_cannons) {
                 squareComponent = new CannonChessComponent(new ChessboardPoint(i, j), color, clickController, CHESS_SIZE);
-            } else if (counter%n_chess4one - n_cannons - n_chariots - n_soldiers < n_elephants) {
+            } else if (counter % n_chess4one - n_cannons - n_chariots - n_soldiers < n_elephants) {
                 squareComponent = new MinisterChessComponent(new ChessboardPoint(i, j), color, clickController, CHESS_SIZE);
-            } else if (counter%n_chess4one - n_cannons - n_chariots - n_soldiers - n_elephants < n_horses) {
+            } else if (counter % n_chess4one - n_cannons - n_chariots - n_soldiers - n_elephants < n_horses) {
                 squareComponent = new HorseChessComponent(new ChessboardPoint(i, j), color, clickController, CHESS_SIZE);
-            } else if (counter%n_chess4one - n_cannons - n_chariots - n_soldiers - n_elephants - n_horses < n_scholars) {
+            } else if (counter % n_chess4one - n_cannons - n_chariots - n_soldiers - n_elephants - n_horses < n_scholars) {
                 squareComponent = new AdvisorChessComponent(new ChessboardPoint(i, j), color, clickController, CHESS_SIZE);
             } else {
                 squareComponent = new GeneralChessComponent(new ChessboardPoint(i, j), color, clickController, CHESS_SIZE);
@@ -192,6 +651,16 @@ public class Chessboard extends JComponent{
             putChessOnBoard(squareComponent);
             squareComponent.repaint();
             counter += 1;
+        }
+        for (int i = 0; i < ROW_SIZE; i++) {
+            SquareComponent squareComponent = new EmptySlotComponent(new ChessboardPoint(i, 0), clickController, CHESS_SIZE);
+            squareComponent.setVisible(true);
+            putChessOnBoard(squareComponent);
+            squareComponent.repaint();
+            SquareComponent squareComponent1 = new EmptySlotComponent(new ChessboardPoint(i, 5), clickController, CHESS_SIZE);
+            squareComponent1.setVisible(true);
+            putChessOnBoard(squareComponent1);
+            squareComponent1.repaint();
         }
         clickController.sendMyCB();
         chessGame = new ArrayList<>();
@@ -206,7 +675,7 @@ public class Chessboard extends JComponent{
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.fillRect(0, 0, this.getWidth(), this.getHeight());
+        g.fillRect(this.getWidth() / 6, 0, this.getWidth() * 2 / 3, this.getHeight());
         ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     }
 
@@ -263,9 +732,9 @@ public class Chessboard extends JComponent{
         else {setCurrentColor(ChessColor.RED);}
         setScoreOfBlack(Integer.parseInt(str.substring(1,3)));
         setScoreOfRed(Integer.parseInt(str.substring(3,5)));
-        String substr;
         for (int i = 0; i < ROW_SIZE*COL_SIZE; i++) {
             ChessColor color;
+            String substr;
             int j = i/COL_SIZE;
             int k = i%COL_SIZE;
             substr = str.substring(5+3*i,5+3*i+3);
@@ -308,6 +777,16 @@ public class Chessboard extends JComponent{
             putChessOnBoard(squareComponent);
             squareComponent.repaint();
         }
+        for (int i = 0; i < 7; i++) {
+            deadNumOfBlack[i] = Integer.parseInt(str.substring(str.length()-14+i,str.length()-13+i));
+            deadNumOfRed[i] = Integer.parseInt(str.substring(str.length()-7+i,str.length()-6+i));
+            if (deadNumOfBlack[i] != 0) {
+                updateDeadChess(ChessColor.BLACK, i);
+            }
+            if (deadNumOfRed[i] != 0) {
+                updateDeadChess(ChessColor.RED, i);
+            }
+        }
         updateFrameLabel();
     }
     public void updateFrameLabel() {
@@ -338,6 +817,12 @@ public class Chessboard extends JComponent{
                 str.append(String.format("%s%s%d", component.getChessColor().toString().charAt(0),
                         component.getCode(), isRevealed10));
             }
+        }
+        for (int num: deadNumOfBlack) {
+            str.append(num);
+        }
+        for (int num: deadNumOfRed) {
+            str.append(num);
         }
         return str.toString();
     }

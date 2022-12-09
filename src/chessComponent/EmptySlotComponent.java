@@ -4,8 +4,6 @@ import controller.ClickController;
 import model.ChessColor;
 import model.ChessboardPoint;
 
-import java.awt.*;
-
 /**
  * 这个类表示棋盘上的空棋子的格子
  */
@@ -15,10 +13,8 @@ public class EmptySlotComponent extends SquareComponent {
         super(chessboardPoint, ChessColor.NONE, listener, size);
     }
 
-
 //    @Override
 //    public boolean canMoveTo(SquareComponent[][] chessboard, ChessboardPoint destination) {
 //        return false;
 //    }
-
 }

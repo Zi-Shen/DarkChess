@@ -153,11 +153,11 @@ public abstract class SquareComponent extends JComponent{
 
 
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponents(g);
-        System.out.printf("repaint chess [%d,%d]\n", chessboardPoint.getX(), chessboardPoint.getY());
-        g.setColor(ThemesColor.chessBoardColor);
-        g.fillRect(1, 1, this.getWidth() - 2, this.getHeight() - 2);
+    public void paintComponent(Graphics g) {
+        if (getChessboardPoint().getY()!=0 && getChessboardPoint().getY()!=5) {
+            System.out.printf("repaint chess [%d,%d]\n", chessboardPoint.getX(), chessboardPoint.getY());
+            g.setColor(ThemesColor.chessBoardColor);
+            g.fillRect(1, 1, this.getWidth() - 2, this.getHeight() - 2);
+        }
     }
-
 }

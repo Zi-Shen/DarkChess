@@ -42,7 +42,7 @@ public class ChessGameFrame extends JFrame {
 
         addHelloPage();
 
-        chessboard = new Chessboard(CHESSBOARD_SIZE / 2, CHESSBOARD_SIZE) {
+        chessboard = new Chessboard(CHESSBOARD_SIZE * 3 / 4, CHESSBOARD_SIZE) {
             // 设置棋格颜色
             @Override
             public void paintComponent(Graphics g) {
@@ -275,7 +275,9 @@ public class ChessGameFrame extends JFrame {
 
     public void askAndSetTheme() {
         String[] options = ThemesColor.avalableTheme();
-        String userChoose = (String) JOptionPane.showInputDialog(this,"Choose a theme to change:","Change Theme",JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+        String userChoose = (String) JOptionPane.showInputDialog(this,
+                "Choose a theme to change:","Change Theme", JOptionPane.QUESTION_MESSAGE,
+                null, options, options[0]);
         for (String option : options) {
             if (option.equals(userChoose)) {
                 ThemesColor.setThemeColor(option);

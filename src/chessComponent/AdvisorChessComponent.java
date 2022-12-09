@@ -26,5 +26,6 @@ public class AdvisorChessComponent extends ChessComponent {
     public void setCode() {
         code = "s";
     }
+
 }
 

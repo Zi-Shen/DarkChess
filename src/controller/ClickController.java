@@ -30,29 +30,31 @@ public class ClickController {
 
     public void onClick(ChessboardPoint cbPoint) {
         //判断第一次点击
-        SquareComponent squareComponent = chessboard.getSquareComponents()[cbPoint.getX()][cbPoint.getY()];
-        if (first == null) {
-            if (handleFirst(cbPoint)) {
-                squareComponent.setSelected(true);
-                first = squareComponent;
-                first.repaint();
-            }
-        } else {
-            if (first == squareComponent) { // 再次点击取消选取
-                squareComponent.setSelected(false);
-                SquareComponent recordFirst = first;
-                first = null;
-                recordFirst.repaint();
-            } else if (handleSecond(cbPoint)) {
-                //repaint in swap chess method.
-                chessboard.swapChessComponents(first, squareComponent);
-                chessboard.clickController.swapPlayer();
-                sendMyCB();
-                chessboard.chessGame.add(chessboard.saveChessBoard2Str());
-                first.setSelected(false);
-                first = null;
-                if (chessboard.getScoreOfBlack() >= 60 || chessboard.getScoreOfRed() >= 60) {
-                    gameOverAndAsk();
+        if (cbPoint.getY()!=0 && cbPoint.getY()!=5) {
+            SquareComponent squareComponent = chessboard.getSquareComponents()[cbPoint.getX()][cbPoint.getY()];
+            if (first == null) {
+                if (handleFirst(cbPoint)) {
+                    squareComponent.setSelected(true);
+                    first = squareComponent;
+                    first.repaint();
+                }
+            } else {
+                if (first == squareComponent) { // 再次点击取消选取
+                    squareComponent.setSelected(false);
+                    SquareComponent recordFirst = first;
+                    first = null;
+                    recordFirst.repaint();
+                } else if (handleSecond(cbPoint)) {
+                    //repaint in swap chess method.
+                    chessboard.eatChessComponents(first, squareComponent);
+                    chessboard.clickController.swapPlayer();
+                    sendMyCB();
+                    chessboard.chessGame.add(chessboard.saveChessBoard2Str());
+                    first.setSelected(false);
+                    first = null;
+                    if (chessboard.getScoreOfBlack() >= 60 || chessboard.getScoreOfRed() >= 60) {
+                        gameOverAndAsk();
+                    }
                 }
             }
         }
