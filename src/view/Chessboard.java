@@ -129,7 +129,7 @@ public class Chessboard extends JComponent{
             putChessOnBoard(deadChess);
             deadChess.repaint();
         }
-        if (index == 1) {
+        else if (index == 1) {
             SquareComponent deadChess;
             if (color == ChessColor.RED){
                 deadChess = new AdvisorChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
@@ -160,7 +160,7 @@ public class Chessboard extends JComponent{
             putChessOnBoard(deadChess);
             deadChess.repaint();
         }
-        if (index == 2) {
+        else if (index == 2) {
             SquareComponent deadChess;
             if (color == ChessColor.RED){
                 deadChess = new MinisterChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
@@ -191,7 +191,7 @@ public class Chessboard extends JComponent{
             putChessOnBoard(deadChess);
             deadChess.repaint();
         }
-        if (index == 3) {
+        else if (index == 3) {
             SquareComponent deadChess;
             if (color == ChessColor.RED){
                 deadChess = new ChariotChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
@@ -222,7 +222,7 @@ public class Chessboard extends JComponent{
             putChessOnBoard(deadChess);
             deadChess.repaint();
         }
-        if (index == 4) {
+        else if (index == 4) {
             SquareComponent deadChess;
             if (color == ChessColor.RED){
                 deadChess = new HorseChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
@@ -253,7 +253,7 @@ public class Chessboard extends JComponent{
             putChessOnBoard(deadChess);
             deadChess.repaint();
         }
-        if (index == 5) {
+        else if (index == 5) {
             SquareComponent deadChess;
             if (color == ChessColor.RED){
                 deadChess = new CannonChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
@@ -284,7 +284,7 @@ public class Chessboard extends JComponent{
             putChessOnBoard(deadChess);
             deadChess.repaint();
         }
-        if (index == 6) {
+        else if (index == 6) {
             SquareComponent deadChess;
             if (color == ChessColor.RED){
                 deadChess = new SoldierChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
@@ -728,8 +728,14 @@ public class Chessboard extends JComponent{
     }
 
     public void loadChessBoardFromStr(String str) {
+        if (str.length()!=163) {
+            JOptionPane.showMessageDialog(null,"Wrong chessboard.\nError code: 102",
+                    "Error", JOptionPane.WARNING_MESSAGE); initAllChessOnBoard(); updateFrameLabel(); return;
+        }
         if (str.charAt(0)=='B') {setCurrentColor(ChessColor.BLACK);}
-        else {setCurrentColor(ChessColor.RED);}
+        else if (str.charAt(0)=='R') {setCurrentColor(ChessColor.RED);}
+        else {JOptionPane.showMessageDialog(null,"Missing chess player.\nError code: 104",
+                "Error", JOptionPane.WARNING_MESSAGE); initAllChessOnBoard(); updateFrameLabel(); return;}
         setScoreOfBlack(Integer.parseInt(str.substring(1,3)));
         setScoreOfRed(Integer.parseInt(str.substring(3,5)));
         for (int i = 0; i < ROW_SIZE*COL_SIZE; i++) {
@@ -740,39 +746,29 @@ public class Chessboard extends JComponent{
             substr = str.substring(5+3*i,5+3*i+3);
             boolean isRev;
             isRev = !Objects.equals(substr.charAt(2), '0');
-            SquareComponent squareComponent = new EmptySlotComponent(new ChessboardPoint(j,k), clickController, CHESS_SIZE);
             if (substr.charAt(0)=='B') {color = ChessColor.BLACK;}
-            else {color = ChessColor.RED;}
+            else if (substr.charAt(0)=='R') {color = ChessColor.RED;}
+            else if (substr.charAt(0)=='N') {color = ChessColor.NONE;}
+            else {
+                JOptionPane.showMessageDialog(null,"Wrong chess piece.\nError code: 103",
+                        "Error", JOptionPane.WARNING_MESSAGE); initAllChessOnBoard(); updateFrameLabel(); return;
+            }
+            SquareComponent squareComponent;
             switch (substr.charAt(1)) {
-                case 'c' -> {
-                    squareComponent = new ChariotChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                    squareComponent.setRevealed(isRev);
-                }
-                case 'm' -> {
-                    squareComponent = new HorseChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                    squareComponent.setRevealed(isRev);
-                }
-                case 'x' -> {
-                    squareComponent = new MinisterChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                    squareComponent.setRevealed(isRev);
-                }
-                case 's' -> {
-                    squareComponent = new AdvisorChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                    squareComponent.setRevealed(isRev);
-                }
-                case 'j' -> {
-                    squareComponent = new GeneralChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                    squareComponent.setRevealed(isRev);
-                }
-                case 'z' -> {
-                    squareComponent = new SoldierChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                    squareComponent.setRevealed(isRev);
-                }
-                case 'p' -> {
-                    squareComponent = new CannonChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                    squareComponent.setRevealed(isRev);
+                case 'c' -> squareComponent = new ChariotChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
+                case 'm' -> squareComponent = new HorseChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
+                case 'x' -> squareComponent = new MinisterChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
+                case 's' -> squareComponent = new AdvisorChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
+                case 'j' -> squareComponent = new GeneralChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
+                case 'z' -> squareComponent = new SoldierChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
+                case 'p' -> squareComponent = new CannonChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
+                case 'e' -> squareComponent = new EmptySlotComponent(new ChessboardPoint(j,k), clickController, CHESS_SIZE);
+                default -> {
+                    JOptionPane.showMessageDialog(null,"Wrong chess piece.\nError code: 103",
+                            "Error", JOptionPane.WARNING_MESSAGE); initAllChessOnBoard(); updateFrameLabel(); return;
                 }
             }
+            squareComponent.setRevealed(isRev);
             squareComponent.setVisible(true);
             putChessOnBoard(squareComponent);
             squareComponent.repaint();
