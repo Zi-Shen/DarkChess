@@ -58,8 +58,8 @@ public class Themes {
             chessLatticeColor = new Color(33, 182, 28, 199);
             brightOrDark = false;
             SquareComponent.CHESS_FONT = new Font("等线", Font.PLAIN, 36);
-            blackChessColor = new Color(255, 255, 255, 118);
-            redChessColor = new Color(115, 25, 25);
+            blackChessColor = new Color(255, 255, 255, 158);
+            redChessColor = new Color(143, 24, 24, 255);
             deadChessLabelColor = new Color(21, 189, 21, 123);
         } else {
             System.out.println("The theme name is not valid. Please use avalableTheme() to get the avalable themes.");

@@ -95,7 +95,13 @@ public class Chessboard extends JComponent{
     }
     private final int[] deadNumOfBlack = new int[7];
     private final int[] deadNumOfRed = new int[7];
-
+    // 设置死亡棋子数字标签的参数
+    private void setDeadChessLabel(Graphics g) {
+        g.setColor(Themes.deadChessLabelColor);
+        g.fillOval(5,5,15,15);
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("黑体", Font.BOLD, 10));
+    }
     // 更新死掉的棋子并且绘制
     private void updateDeadChess(ChessColor color, int index) {
         if (index == 0) {
@@ -105,10 +111,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Themes.deadChessLabelColor);
-                        g.fillOval(5,5,15,15);
-                        g.setColor(Color.WHITE);
-                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        setDeadChessLabel(g);
                         g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
                     }
                 };
@@ -117,10 +120,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Themes.deadChessLabelColor);
-                        g.fillOval(5,5,15,15);
-                        g.setColor(Color.WHITE);
-                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        setDeadChessLabel(g);
                         g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
                     }
                 };
@@ -136,10 +136,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Themes.deadChessLabelColor);
-                        g.fillOval(5,5,15,15);
-                        g.setColor(Color.WHITE);
-                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        setDeadChessLabel(g);
                         g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
                     }
                 };
@@ -148,10 +145,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Themes.deadChessLabelColor);
-                        g.fillOval(5,5,15,15);
-                        g.setColor(Color.WHITE);
-                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        setDeadChessLabel(g);
                         g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
                     }
                 };
@@ -167,10 +161,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Themes.deadChessLabelColor);
-                        g.fillOval(5,5,15,15);
-                        g.setColor(Color.WHITE);
-                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        setDeadChessLabel(g);
                         g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
                     }
                 };
@@ -179,10 +170,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Themes.deadChessLabelColor);
-                        g.fillOval(5,5,15,15);
-                        g.setColor(Color.WHITE);
-                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        setDeadChessLabel(g);
                         g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
                     }
                 };
@@ -198,10 +186,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Themes.deadChessLabelColor);
-                        g.fillOval(5,5,15,15);
-                        g.setColor(Color.WHITE);
-                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        setDeadChessLabel(g);
                         g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
                     }
                 };
@@ -210,10 +195,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Themes.deadChessLabelColor);
-                        g.fillOval(5,5,15,15);
-                        g.setColor(Color.WHITE);
-                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        setDeadChessLabel(g);
                         g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
                     }
                 };
@@ -229,10 +211,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Themes.deadChessLabelColor);
-                        g.fillOval(5,5,15,15);
-                        g.setColor(Color.WHITE);
-                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        setDeadChessLabel(g);
                         g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
                     }
                 };
@@ -241,10 +220,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Themes.deadChessLabelColor);
-                        g.fillOval(5,5,15,15);
-                        g.setColor(Color.WHITE);
-                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        setDeadChessLabel(g);
                         g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
                     }
                 };
@@ -260,10 +236,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Themes.deadChessLabelColor);
-                        g.fillOval(5,5,15,15);
-                        g.setColor(Color.WHITE);
-                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        setDeadChessLabel(g);
                         g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
                     }
                 };
@@ -272,10 +245,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Themes.deadChessLabelColor);
-                        g.fillOval(5,5,15,15);
-                        g.setColor(Color.WHITE);
-                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        setDeadChessLabel(g);
                         g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
                     }
                 };
@@ -291,10 +261,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Themes.deadChessLabelColor);
-                        g.fillOval(5,5,15,15);
-                        g.setColor(Color.WHITE);
-                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        setDeadChessLabel(g);
                         g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
                     }
                 };
@@ -303,10 +270,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Themes.deadChessLabelColor);
-                        g.fillOval(5,5,15,15);
-                        g.setColor(Color.WHITE);
-                        g.setFont(new Font("黑体", Font.BOLD, 10));
+                        setDeadChessLabel(g);
                         g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
                     }
                 };
@@ -326,10 +290,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Themes.deadChessLabelColor);
-                            g.fillOval(5,5,15,15);
-                            g.setColor(Color.WHITE);
-                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            setDeadChessLabel(g);
                             g.drawString(String.valueOf(deadNumOfRed[0]), 10,16);
                         }
                     }
@@ -341,10 +302,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Themes.deadChessLabelColor);
-                            g.fillOval(5,5,15,15);
-                            g.setColor(Color.WHITE);
-                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            setDeadChessLabel(g);
                             g.drawString(String.valueOf(deadNumOfBlack[0]), 10,16);
                         }
                     }
@@ -358,10 +316,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Themes.deadChessLabelColor);
-                            g.fillOval(5,5,15,15);
-                            g.setColor(Color.WHITE);
-                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            setDeadChessLabel(g);
                             g.drawString(String.valueOf(deadNumOfRed[1]), 10,16);
                         }
                     }
@@ -373,10 +328,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Themes.deadChessLabelColor);
-                            g.fillOval(5,5,15,15);
-                            g.setColor(Color.WHITE);
-                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            setDeadChessLabel(g);
                             g.drawString(String.valueOf(deadNumOfBlack[1]), 10,16);
                         }
                     }
@@ -390,10 +342,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Themes.deadChessLabelColor);
-                            g.fillOval(5,5,15,15);
-                            g.setColor(Color.WHITE);
-                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            setDeadChessLabel(g);
                             g.drawString(String.valueOf(deadNumOfRed[2]), 10,16);
                         }
                     }
@@ -405,10 +354,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Themes.deadChessLabelColor);
-                            g.fillOval(5,5,15,15);
-                            g.setColor(Color.WHITE);
-                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            setDeadChessLabel(g);
                             g.drawString(String.valueOf(deadNumOfBlack[2]), 10,16);
                         }
                     }
@@ -422,10 +368,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Themes.deadChessLabelColor);
-                            g.fillOval(5,5,15,15);
-                            g.setColor(Color.WHITE);
-                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            setDeadChessLabel(g);
                             g.drawString(String.valueOf(deadNumOfRed[3]), 10,16);
                         }
                     }
@@ -437,10 +380,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Themes.deadChessLabelColor);
-                            g.fillOval(5,5,15,15);
-                            g.setColor(Color.WHITE);
-                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            setDeadChessLabel(g);
                             g.drawString(String.valueOf(deadNumOfBlack[3]), 10,16);
                         }
                     }
@@ -454,10 +394,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Themes.deadChessLabelColor);
-                            g.fillOval(5,5,15,15);
-                            g.setColor(Color.WHITE);
-                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            setDeadChessLabel(g);
                             g.drawString(String.valueOf(deadNumOfRed[4]), 10,16);
                         }
                     }
@@ -469,10 +406,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Themes.deadChessLabelColor);
-                            g.fillOval(5,5,15,15);
-                            g.setColor(Color.WHITE);
-                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            setDeadChessLabel(g);
                             g.drawString(String.valueOf(deadNumOfBlack[4]), 10,16);
                         }
                     }
@@ -486,10 +420,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Themes.deadChessLabelColor);
-                            g.fillOval(5,5,15,15);
-                            g.setColor(Color.WHITE);
-                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            setDeadChessLabel(g);
                             g.drawString(String.valueOf(deadNumOfRed[5]), 10,16);
                         }
                     }
@@ -501,10 +432,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Themes.deadChessLabelColor);
-                            g.fillOval(5,5,15,15);
-                            g.setColor(Color.WHITE);
-                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            setDeadChessLabel(g);
                             g.drawString(String.valueOf(deadNumOfBlack[5]), 10,16);
                         }
                     }
@@ -518,10 +446,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Themes.deadChessLabelColor);
-                            g.fillOval(5,5,15,15);
-                            g.setColor(Color.WHITE);
-                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            setDeadChessLabel(g);
                             g.drawString(String.valueOf(deadNumOfRed[6]), 10,16);
                         }
                     }
@@ -533,10 +458,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Themes.deadChessLabelColor);
-                            g.fillOval(5,5,15,15);
-                            g.setColor(Color.WHITE);
-                            g.setFont(new Font("黑体", Font.BOLD, 10));
+                            setDeadChessLabel(g);
                             g.drawString(String.valueOf(deadNumOfBlack[6]), 10,16);
                         }
                     }
@@ -573,6 +495,7 @@ public class Chessboard extends JComponent{
         System.out.printf("Black's score: %d\n", scoreOfBlack);
         System.out.printf("Red's score: %d\n", scoreOfRed);
     }
+    // 用于棋盘打乱
     public int[] indexShuffle(int[] index_i) {
         Random rand = new Random();
         int[] index = Arrays.copyOf(index_i, index_i.length);
@@ -584,7 +507,7 @@ public class Chessboard extends JComponent{
         }
         return index;
     }
-
+    // 用于作为indexShuffle的arg
     public int[] arange(int size) {
         int[] res = new int[size];
         for (int i = 0; i < size; i++) {
@@ -592,8 +515,6 @@ public class Chessboard extends JComponent{
         }
         return res;
     }
-
-
     public void repaintAll() {
         for (int i = 0; i < ROW_SIZE; i++) {
             for (int j = 0; j < COL_SIZE; j++) {
