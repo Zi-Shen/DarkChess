@@ -24,7 +24,7 @@ public class Themes {
             chessBoardColor = new Color(250, 220, 190);
             brightOrDark = true;
             chessLatticeColor = Color.BLACK;
-            SquareComponent.CHESS_FONT = new Font("宋体", Font.PLAIN, 36);
+            SquareComponent.CHESS_FONT = new Font("宋体", Font.BOLD, 36);
             blackChessColor = new Color(0, 0, 0, 255);
             redChessColor = Color.RED;
             deadChessLabelColor = Color.RED;
@@ -36,7 +36,7 @@ public class Themes {
             brightOrDark = false;
             chessLatticeColor = new Color(0, 255, 239, 179);
             SquareComponent.CHESS_FONT = new Font("幼圆", Font.BOLD,36);
-            blackChessColor = new Color(18, 51, 143, 255);
+            blackChessColor = new Color(0, 113, 211, 255);
             redChessColor = Color.RED;
             deadChessLabelColor = new Color(102, 38, 138, 255);
         } else if (Objects.equals(themeName, avalableTheme()[2])) {

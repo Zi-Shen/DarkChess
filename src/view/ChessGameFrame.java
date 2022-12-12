@@ -165,7 +165,7 @@ public class ChessGameFrame extends JFrame {
         JButton saveButton = new JButton("Save Game");
         saveButton.addActionListener((e) -> {
             System.out.println("Click save button");
-            ImageIcon load = new ImageIcon("icons\\load.png");
+            //ImageIcon load = new ImageIcon("icons\\load.png");
             String name = JOptionPane.showInputDialog(null,
                     "Please enter the game name:","Save Game", JOptionPane.PLAIN_MESSAGE);
             if (name.length()==0) {
@@ -237,7 +237,7 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addThemeButton() {
-        JButton themeButton = new JButton("Theme Color");
+        JButton themeButton = new JButton("Theme Setting");
         themeButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 160 + 80 * 4);
         themeButton.setSize(150, 30);
         themeButton.setFont(new Font("Rockwell", Font.BOLD, 16));
