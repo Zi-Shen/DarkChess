@@ -165,9 +165,9 @@ public class ChessGameFrame extends JFrame {
         JButton saveButton = new JButton("Save Game");
         saveButton.addActionListener((e) -> {
             System.out.println("Click save button");
-            //ImageIcon load = new ImageIcon("icons\\load.png");
-            String name = JOptionPane.showInputDialog(null,
-                    "Please enter the game name:","Save Game", JOptionPane.PLAIN_MESSAGE);
+            ImageIcon save = new ImageIcon("icons\\save.png");
+            String name = (String) JOptionPane.showInputDialog(null,
+                    "Please enter the game name:","Save Game", JOptionPane.PLAIN_MESSAGE, save, null, null);
             if (name.length()==0) {
                 JOptionPane.showMessageDialog(null,
                         "Game name cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
