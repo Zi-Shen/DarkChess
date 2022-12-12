@@ -120,10 +120,11 @@ public class ClickController {
 
     public void gameOverAndAsk() {
         String[] options = {"Play Again","Exit Game"};
+        ImageIcon win = new ImageIcon("icons\\win.png");
         if (chessboard.getScoreOfBlack() >= 60) {
             int userChoose =  JOptionPane.showOptionDialog(null,"BLACK WON!",
                     "GAME OVER",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,
-                    null,options,options[0]);
+                    win,options,options[0]);
             System.out.println("BLACK WIN!");
             if (userChoose == 0) {
                 chessboard.initAllChessOnBoard();
@@ -134,7 +135,7 @@ public class ClickController {
             //JOptionPane.showMessageDialog(null, "RED WIN!", "GAME OVER", JOptionPane.PLAIN_MESSAGE);
             int userChoose =  JOptionPane.showOptionDialog(null,"RED WON!",
                     "GAME OVER",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,
-                    null,options,options[0]);		//选择对话框*/
+                    win,options,options[0]);		//选择对话框*/
             // JOptionPane.showMessageDialog(null, "BLACK WIN!", "GAME OVER", JOptionPane.PLAIN_MESSAGE);
             System.out.println("RED WIN!");
             if (userChoose == 0) {

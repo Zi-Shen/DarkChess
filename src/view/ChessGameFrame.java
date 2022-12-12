@@ -62,9 +62,10 @@ public class ChessGameFrame extends JFrame {
 
     private void addHelloPage() {
         String[] options = {"Local Play","LAN Game"};
+        ImageIcon hello = new ImageIcon("icons\\hello.png");
         int choice = JOptionPane.showOptionDialog(
                 this,"Welcome!\nPlease choose game mode:",
-                "Welcome!", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,
+                "Welcome!", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,hello,
                 options,options[0]
         );
         if (choice == 0) {
@@ -164,8 +165,9 @@ public class ChessGameFrame extends JFrame {
         JButton saveButton = new JButton("Save Game");
         saveButton.addActionListener((e) -> {
             System.out.println("Click save button");
+            ImageIcon load = new ImageIcon("icons\\load.png");
             String name = JOptionPane.showInputDialog(null,
-                    "Please enter the game name:","Save Game",JOptionPane.WARNING_MESSAGE);
+                    "Please enter the game name:","Save Game", JOptionPane.PLAIN_MESSAGE);
             if (name.length()==0) {
                 JOptionPane.showMessageDialog(null,
                         "Game name cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -195,7 +197,9 @@ public class ChessGameFrame extends JFrame {
         loadButton.addActionListener(e -> {
             System.out.println("Click load");
             String[] options = getFileListFromPath("gamedata\\");
-            String option =  (String)JOptionPane.showInputDialog(null,"Please choose a game","Load Game",JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+            ImageIcon hello = new ImageIcon("icons\\load.png");
+            String option =  (String)JOptionPane.showInputDialog(null,"Please choose a game",
+                    "Load Game", JOptionPane.QUESTION_MESSAGE,hello,options,options[0]);
             chessboard.readGameFromFile(option);
             ChessGameFrame.getStatusLabel().setText(String.format("%s's TURN", chessboard.getCurrentColor().getName()));
             ChessGameFrame.getRedScoreLabel().setText(String.format("RED's SCORE: %d", chessboard.getScoreOfRed()));
@@ -274,9 +278,10 @@ public class ChessGameFrame extends JFrame {
 
     public void askAndSetTheme() {
         String[] options = Themes.avalableTheme();
+        ImageIcon theme = new ImageIcon("icons\\theme.png");
         String userChoose = (String) JOptionPane.showInputDialog(this,
                 "Choose a theme to change:","Change Theme", JOptionPane.QUESTION_MESSAGE,
-                null, options, options[0]);
+                theme, options, options[0]);
         for (String option : options) {
             if (option.equals(userChoose)) {
                 Themes.setTheme(option);
