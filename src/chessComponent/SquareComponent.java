@@ -3,7 +3,7 @@ package chessComponent;
 import controller.ClickController;
 import model.ChessColor;
 import model.ChessboardPoint;
-import view.ThemesColor;
+import view.Themes;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,7 +31,7 @@ public abstract class SquareComponent extends JComponent{
         setCode();
     }
     protected static int spacingLength;
-    protected static final Font CHESS_FONT = new Font("楷体", Font.BOLD, 36);
+    public static Font CHESS_FONT = new Font("宋体", Font.BOLD, 36);
     protected String code;
 
     public String getCode() {
@@ -156,7 +156,7 @@ public abstract class SquareComponent extends JComponent{
     public void paintComponent(Graphics g) {
         if (getChessboardPoint().getY()!=0 && getChessboardPoint().getY()!=5) {
             System.out.printf("repaint chess [%d,%d]\n", chessboardPoint.getX(), chessboardPoint.getY());
-            g.setColor(ThemesColor.chessBoardColor);
+            g.setColor(Themes.chessBoardColor);
             g.fillRect(1, 1, this.getWidth() - 2, this.getHeight() - 2);
         }
     }

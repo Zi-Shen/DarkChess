@@ -3,7 +3,7 @@ package chessComponent;
 import controller.ClickController;
 import model.ChessColor;
 import model.ChessboardPoint;
-import view.ThemesColor;
+import view.Themes;
 
 import java.awt.*;
 
@@ -19,38 +19,47 @@ public class ChessComponent extends SquareComponent{
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(ThemesColor.chessPieceColor);
+        g.setColor(Themes.chessPieceColor);
         g.fillOval(spacingLength, spacingLength, this.getWidth() - 2 * spacingLength, this.getHeight() - 2 * spacingLength);
         //绘制棋子边框
         Graphics2D g2 = (Graphics2D) g;
         g2.setStroke(new BasicStroke(1f));
-        g2.setColor(ThemesColor.chessOuterLine);
+        g2.setColor(Themes.chessOuterLine);
         g2.drawOval(spacingLength, spacingLength, getWidth() - 2 * spacingLength, getHeight() - 2 * spacingLength);
         //绘制棋子填充色
         if (isRevealed) {
             //绘制棋子内径
-            g2.setColor(ThemesColor.chessInnerLine);
+            g2.setColor(Themes.chessInnerLine);
             g2.setStroke(new BasicStroke(2f));
             g2.drawOval(spacingLength+5, spacingLength+5, getWidth() - 2 * spacingLength-10, getHeight() - 2 * spacingLength-10);
             //绘制棋子被选中时状态
             if (isSelected()) {
-                g2.setColor(ThemesColor.chessPieceColor);
+                g2.setColor(Themes.chessPieceColor);
                 g2.fillOval(spacingLength-5, spacingLength-5, getWidth() - 2 * spacingLength+10, getHeight() - 2 * spacingLength+10);
                 //绘制内径
-                g2.setColor(ThemesColor.chessInnerLine);
+                g2.setColor(Themes.chessInnerLine);
                 g2.drawOval(spacingLength, spacingLength, getWidth() - 2 * spacingLength, getHeight() - 2 * spacingLength);
                 //绘制棋子外径
                 g2.setStroke(new BasicStroke(1f));
-                g2.setColor(ThemesColor.chessOuterLine);
+                g2.setColor(Themes.chessOuterLine);
                 g2.drawOval(spacingLength-5, spacingLength-5, getWidth() - 2 * spacingLength+10, getHeight() - 2 * spacingLength+10);
                 // 绘制大一点的文字
-                g.setColor(this.getChessColor().getColor());
-                Font selectedFont = new Font(CHESS_FONT.getName(), CHESS_FONT.getStyle(), CHESS_FONT.getSize()+6);;
+                if (this.getChessColor()==ChessColor.RED) {
+                    g.setColor(Themes.redChessColor);
+                } else {
+                    g.setColor(Themes.blackChessColor);
+                }
+                Font selectedFont = new Font(CHESS_FONT.getName(), CHESS_FONT.getStyle(), CHESS_FONT.getSize()+6);
                 g.setFont(selectedFont);
                 g.drawString(this.name, this.getWidth() / 4 - 3, this.getHeight() * 2 / 3 + 3);
             } else {
                 //绘制棋子文字
-                g.setColor(this.getChessColor().getColor());
+                if (this.getChessColor()==ChessColor.RED) {
+                    g.setColor(Themes.redChessColor);
+                } else {
+                    g.setColor(Themes.blackChessColor);
+                }
+
                 g.setFont(CHESS_FONT);
                 g.drawString(this.name, this.getWidth() / 4, this.getHeight() * 2 / 3);
             }

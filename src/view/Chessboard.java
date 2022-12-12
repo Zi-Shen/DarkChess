@@ -105,7 +105,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Color.RED);
+                        g.setColor(Themes.deadChessLabelColor);
                         g.fillOval(5,5,15,15);
                         g.setColor(Color.WHITE);
                         g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -117,7 +117,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Color.RED);
+                        g.setColor(Themes.deadChessLabelColor);
                         g.fillOval(5,5,15,15);
                         g.setColor(Color.WHITE);
                         g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -136,7 +136,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Color.RED);
+                        g.setColor(Themes.deadChessLabelColor);
                         g.fillOval(5,5,15,15);
                         g.setColor(Color.WHITE);
                         g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -148,7 +148,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Color.RED);
+                        g.setColor(Themes.deadChessLabelColor);
                         g.fillOval(5,5,15,15);
                         g.setColor(Color.WHITE);
                         g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -167,7 +167,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Color.RED);
+                        g.setColor(Themes.deadChessLabelColor);
                         g.fillOval(5,5,15,15);
                         g.setColor(Color.WHITE);
                         g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -179,7 +179,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Color.RED);
+                        g.setColor(Themes.deadChessLabelColor);
                         g.fillOval(5,5,15,15);
                         g.setColor(Color.WHITE);
                         g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -198,7 +198,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Color.RED);
+                        g.setColor(Themes.deadChessLabelColor);
                         g.fillOval(5,5,15,15);
                         g.setColor(Color.WHITE);
                         g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -210,7 +210,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Color.RED);
+                        g.setColor(Themes.deadChessLabelColor);
                         g.fillOval(5,5,15,15);
                         g.setColor(Color.WHITE);
                         g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -229,7 +229,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Color.RED);
+                        g.setColor(Themes.deadChessLabelColor);
                         g.fillOval(5,5,15,15);
                         g.setColor(Color.WHITE);
                         g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -241,7 +241,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Color.RED);
+                        g.setColor(Themes.deadChessLabelColor);
                         g.fillOval(5,5,15,15);
                         g.setColor(Color.WHITE);
                         g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -260,7 +260,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Color.RED);
+                        g.setColor(Themes.deadChessLabelColor);
                         g.fillOval(5,5,15,15);
                         g.setColor(Color.WHITE);
                         g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -272,7 +272,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Color.RED);
+                        g.setColor(Themes.deadChessLabelColor);
                         g.fillOval(5,5,15,15);
                         g.setColor(Color.WHITE);
                         g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -291,7 +291,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Color.RED);
+                        g.setColor(Themes.deadChessLabelColor);
                         g.fillOval(5,5,15,15);
                         g.setColor(Color.WHITE);
                         g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -303,7 +303,7 @@ public class Chessboard extends JComponent{
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        g.setColor(Color.RED);
+                        g.setColor(Themes.deadChessLabelColor);
                         g.fillOval(5,5,15,15);
                         g.setColor(Color.WHITE);
                         g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -326,7 +326,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Color.RED);
+                            g.setColor(Themes.deadChessLabelColor);
                             g.fillOval(5,5,15,15);
                             g.setColor(Color.WHITE);
                             g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -341,7 +341,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Color.RED);
+                            g.setColor(Themes.deadChessLabelColor);
                             g.fillOval(5,5,15,15);
                             g.setColor(Color.WHITE);
                             g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -358,7 +358,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Color.RED);
+                            g.setColor(Themes.deadChessLabelColor);
                             g.fillOval(5,5,15,15);
                             g.setColor(Color.WHITE);
                             g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -373,7 +373,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Color.RED);
+                            g.setColor(Themes.deadChessLabelColor);
                             g.fillOval(5,5,15,15);
                             g.setColor(Color.WHITE);
                             g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -390,7 +390,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Color.RED);
+                            g.setColor(Themes.deadChessLabelColor);
                             g.fillOval(5,5,15,15);
                             g.setColor(Color.WHITE);
                             g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -405,7 +405,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Color.RED);
+                            g.setColor(Themes.deadChessLabelColor);
                             g.fillOval(5,5,15,15);
                             g.setColor(Color.WHITE);
                             g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -422,7 +422,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Color.RED);
+                            g.setColor(Themes.deadChessLabelColor);
                             g.fillOval(5,5,15,15);
                             g.setColor(Color.WHITE);
                             g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -437,7 +437,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Color.RED);
+                            g.setColor(Themes.deadChessLabelColor);
                             g.fillOval(5,5,15,15);
                             g.setColor(Color.WHITE);
                             g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -454,7 +454,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Color.RED);
+                            g.setColor(Themes.deadChessLabelColor);
                             g.fillOval(5,5,15,15);
                             g.setColor(Color.WHITE);
                             g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -469,7 +469,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Color.RED);
+                            g.setColor(Themes.deadChessLabelColor);
                             g.fillOval(5,5,15,15);
                             g.setColor(Color.WHITE);
                             g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -486,7 +486,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Color.RED);
+                            g.setColor(Themes.deadChessLabelColor);
                             g.fillOval(5,5,15,15);
                             g.setColor(Color.WHITE);
                             g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -501,7 +501,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Color.RED);
+                            g.setColor(Themes.deadChessLabelColor);
                             g.fillOval(5,5,15,15);
                             g.setColor(Color.WHITE);
                             g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -518,7 +518,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Color.RED);
+                            g.setColor(Themes.deadChessLabelColor);
                             g.fillOval(5,5,15,15);
                             g.setColor(Color.WHITE);
                             g.setFont(new Font("黑体", Font.BOLD, 10));
@@ -533,7 +533,7 @@ public class Chessboard extends JComponent{
                     public void paintComponent(Graphics g){
                         super.paintComponent(g);
                         if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
-                            g.setColor(Color.RED);
+                            g.setColor(Themes.deadChessLabelColor);
                             g.fillOval(5,5,15,15);
                             g.setColor(Color.WHITE);
                             g.setFont(new Font("黑体", Font.BOLD, 10));

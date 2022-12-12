@@ -1,7 +1,6 @@
 package view;
 
 import controller.ClickController;
-import controller.GameController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -46,7 +45,7 @@ public class ChessGameFrame extends JFrame {
             // 设置棋格颜色
             @Override
             public void paintComponent(Graphics g) {
-                g.setColor(ThemesColor.chessLatticeColor);
+                g.setColor(Themes.chessLatticeColor);
                 super.paintComponent(g);
             }
         };
@@ -274,14 +273,14 @@ public class ChessGameFrame extends JFrame {
     }
 
     public void askAndSetTheme() {
-        String[] options = ThemesColor.avalableTheme();
+        String[] options = Themes.avalableTheme();
         String userChoose = (String) JOptionPane.showInputDialog(this,
                 "Choose a theme to change:","Change Theme", JOptionPane.QUESTION_MESSAGE,
                 null, options, options[0]);
         for (String option : options) {
             if (option.equals(userChoose)) {
-                ThemesColor.setThemeColor(option);
-                if (ThemesColor.brightOrDark) {
+                Themes.setTheme(option);
+                if (Themes.brightOrDark) {
                     this.getContentPane().setBackground(Color.WHITE);
                     getStatusLabel().setForeground(Color.BLACK);
                     getBlackScoreLabel().setForeground(Color.BLACK);
