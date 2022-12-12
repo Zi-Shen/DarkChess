@@ -56,10 +56,14 @@ public class ChessGameFrame extends JFrame {
         addLoadButton();
         addRestartButton();
         addThemeButton();
-        addUndoButton();
+        addCheatButton();
+
+        undoB = geneUndoButton();
+        add(undoB);
+
         addExitReminder();
     }
-
+    private final JButton undoB;
     private void addHelloPage() {
         String[] options = {"Local Play","LAN Game"};
         ImageIcon hello = new ImageIcon("icons\\hello.png");
@@ -175,7 +179,7 @@ public class ChessGameFrame extends JFrame {
                 chessboard.saveGame2File(name);
             }
         });
-        saveButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 160 + 80 * 0);
+        saveButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 120 + 80 * 0);
         saveButton.setSize(150, 30);
         saveButton.setFont(new Font("Rockwell", Font.BOLD, 16));
         saveButton.setBackground(Color.WHITE);
@@ -183,10 +187,9 @@ public class ChessGameFrame extends JFrame {
         add(saveButton);
         buttonList.add(saveButton);
     }
-
     private void addLoadButton() {
         JButton loadButton = new JButton("Load Game");
-        loadButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 160 + 80 * 1);
+        loadButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 120 + 80 * 1);
         loadButton.setSize(150, 30);
         loadButton.setFont(new Font("Rockwell", Font.BOLD, 16));
         loadButton.setForeground(Color.DARK_GRAY);
@@ -200,16 +203,77 @@ public class ChessGameFrame extends JFrame {
             ImageIcon hello = new ImageIcon("icons\\load.png");
             String option =  (String)JOptionPane.showInputDialog(null,"Please choose a game",
                     "Load Game", JOptionPane.QUESTION_MESSAGE,hello,options,options[0]);
+            String[] replayChoice = {"Yes", "No"};
+            int isReplay = JOptionPane.showOptionDialog(null,"Do you want load this game in replay mode",
+                    "Replay mode", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,replayChoice,replayChoice[1]);
             chessboard.readGameFromFile(option);
+            if (isReplay != 1) {
+                if (!isOnline) {
+                    chessboard.loadChessBoardFromStr(chessboard.chessGame.get(0));
+                    remove(undoB);
+                    addExitReplayButtons();
+                    geneNextStepButtons();
+                    geneLastStepButtons();
+                    repaint();
+                    Chessboard.isReplay = true;
+                    Chessboard.replayStep = 0;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Online mode does not support replay mode.");
+                }
+            }
             ChessGameFrame.getStatusLabel().setText(String.format("%s's TURN", chessboard.getCurrentColor().getName()));
             ChessGameFrame.getRedScoreLabel().setText(String.format("RED's SCORE: %d", chessboard.getScoreOfRed()));
             ChessGameFrame.getBlackScoreLabel().setText(String.format("BLACK's SCORE: %d", chessboard.getScoreOfBlack()));
         });
     }
+    private JButton nextStepButton;
+    private JButton lastStepButton;
+    private void geneNextStepButtons() {
+        nextStepButton = new JButton();
+        ImageIcon next = new ImageIcon("icons\\right_bold.png");
+        nextStepButton.setIcon(next);
+        nextStepButton.setLocation(WIDTH * 3 / 5 + 120 + 40, HEIGHT / 10 + 120 + 80 * 3 - 5);
+        nextStepButton.setSize(40, 40);
+        nextStepButton.setForeground(Color.DARK_GRAY);
+        nextStepButton.setBackground(Color.WHITE);
+        add(nextStepButton);
+        buttonList.add(nextStepButton);
+        nextStepButton.addActionListener((e) -> chessboard.nextStep());
+    }
+    private void geneLastStepButtons() {
+        lastStepButton = new JButton();
+        ImageIcon last = new ImageIcon("icons\\left_bold.png");
+        lastStepButton.setIcon(last);
+        lastStepButton.setLocation(WIDTH * 3 / 5 - 30 - 20, HEIGHT / 10 + 120 + 80 * 3 - 5);
+        lastStepButton.setSize(40, 40);
+        lastStepButton.setForeground(Color.DARK_GRAY);
+        lastStepButton.setBackground(Color.WHITE);
+        add(lastStepButton);
+        buttonList.add(lastStepButton);
+        lastStepButton.addActionListener((e) -> chessboard.lastStep());
+    }
+    private void addExitReplayButtons() {
+        JButton undoButton = new JButton("Exit Replay");
+        undoButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 120 + 80 * 3);
+        undoButton.setSize(150, 30);
+        undoButton.setFont(new Font("Rockwell", Font.BOLD, 16));
+        undoButton.setForeground(Color.DARK_GRAY);
+        undoButton.setBackground(Color.WHITE);
+        add(undoButton);
+        buttonList.add(undoButton);
+        undoButton.addActionListener((e) -> {
+            remove(nextStepButton);
+            remove(lastStepButton);
+            remove(undoButton);
+            add(undoB);
+            repaint();
+            Chessboard.isReplay = false;
+        });
+    }
 
     private void addRestartButton() {
         JButton restartButton = new JButton("Restart");
-        restartButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 160 + 80 * 2);
+        restartButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 120 + 80 * 2);
         restartButton.setSize(150, 30);
         restartButton.setFont(new Font("Rockwell", Font.BOLD, 16));
         restartButton.setBackground(Color.WHITE);
@@ -224,9 +288,9 @@ public class ChessGameFrame extends JFrame {
         });
     }
 
-    private void addUndoButton() {
+    private JButton geneUndoButton() {
         JButton undoButton = new JButton("Undo 1 step");
-        undoButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 160 + 80 * 3);
+        undoButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 120 + 80 * 3);
         undoButton.setSize(150, 30);
         undoButton.setFont(new Font("Rockwell", Font.BOLD, 16));
         undoButton.setForeground(Color.DARK_GRAY);
@@ -234,11 +298,34 @@ public class ChessGameFrame extends JFrame {
         add(undoButton);
         buttonList.add(undoButton);
         undoButton.addActionListener((e) -> chessboard.undo1step());
+        return undoButton;
     }
-
+    private void addCheatButton() {
+        JButton cheatButton = new JButton("Cheating code");
+        cheatButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 120 + 80 * 4);
+        cheatButton.setSize(150, 30);
+        cheatButton.setFont(new Font("Rockwell", Font.BOLD, 16));
+        cheatButton.setForeground(Color.DARK_GRAY);
+        cheatButton.setBackground(Color.WHITE);
+        add(cheatButton);
+        buttonList.add(cheatButton);
+        cheatButton.addActionListener((e) -> {
+            String code = (String) JOptionPane.showInputDialog(null,
+                    "Please input the cheating code:","Cheating Code",
+                    JOptionPane.QUESTION_MESSAGE,null,null,null);
+            if (Objects.equals(code, "startpeeking")) {
+                chessboard.enablePeekingMode();
+            } else if (Objects.equals(code, "stoppeeking")) {
+                chessboard.stopPeekingMode();
+            } else {
+                JOptionPane.showMessageDialog(null, "Wrong cheating mode.","Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        });
+    }
     private void addThemeButton() {
         JButton themeButton = new JButton("Theme Setting");
-        themeButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 160 + 80 * 4);
+        themeButton.setLocation(WIDTH * 3 / 5, HEIGHT / 10 + 120 + 80 * 5);
         themeButton.setSize(150, 30);
         themeButton.setFont(new Font("Rockwell", Font.BOLD, 16));
         themeButton.setForeground(Color.DARK_GRAY);

@@ -48,8 +48,10 @@ public class ClickController {
                     //repaint in swap chess method.
                     chessboard.eatChessComponents(first, squareComponent);
                     chessboard.clickController.swapPlayer();
-                    sendMyCB();
-                    chessboard.chessGame.add(chessboard.saveChessBoard2Str());
+                    if(!chessboard.isCheating) {sendMyCB();}
+                    if (!Chessboard.isReplay) {
+                        chessboard.chessGame.add(chessboard.saveChessBoard2Str());
+                    }
                     first.setSelected(false);
                     first = null;
                     if (chessboard.getScoreOfBlack() >= 60 || chessboard.getScoreOfRed() >= 60) {
@@ -75,9 +77,10 @@ public class ClickController {
             System.out.printf("onClick to reverse a chess [%d,%d]\n", squareComponent.getChessboardPoint().getX(), squareComponent.getChessboardPoint().getY());
             squareComponent.repaint();
             chessboard.clickController.swapPlayer();
-            sendMyCB();
-            chessboard.chessGame.add(chessboard.saveChessBoard2Str());
-
+            if(!chessboard.isCheating){sendMyCB();}
+            if (!Chessboard.isReplay) {
+                chessboard.chessGame.add(chessboard.saveChessBoard2Str());
+            }
             return false;
         }
         return squareComponent.getChessColor() == chessboard.getCurrentColor();

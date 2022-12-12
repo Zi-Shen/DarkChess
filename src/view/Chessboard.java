@@ -1,6 +1,5 @@
 package view;
 
-
 import chessComponent.*;
 import model.*;
 import controller.ClickController;
@@ -589,6 +588,28 @@ public class Chessboard extends JComponent{
         System.out.printf("Game is initialized to: %s", chessGame.get(0));
     }
 
+    public static boolean isReplay = false;
+    public static int replayStep = 0;
+    public void lastStep(){
+        if (replayStep>=1) {
+            loadChessBoardFromStr(chessGame.get(replayStep - 1));
+            replayStep -= 1;
+        } else {
+            JOptionPane.showMessageDialog(null,"This is the first step", "Error",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    public void nextStep(){
+        if (replayStep<chessGame.size()-1) {
+            loadChessBoardFromStr(chessGame.get(replayStep + 1));
+            replayStep += 1;
+        } else {
+            JOptionPane.showMessageDialog(null,"This is the last step", "Error",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
     /**
      * 绘制棋盘格子
      * @param g 棋盘
@@ -743,6 +764,7 @@ public class Chessboard extends JComponent{
         }
         return str.toString();
     }
+
     public void undo1step() {
         if (chessGame.size()>1) {
             chessGame.remove(chessGame.size()-1);
@@ -754,5 +776,15 @@ public class Chessboard extends JComponent{
                     JOptionPane.WARNING_MESSAGE
             );
         }
+    }
+    public boolean isCheating = false;
+    public void enablePeekingMode() {
+        isCheating = true;
+        isReplay = true; // isReplay==true 时，任何行动不会实质性地改变游戏
+    }
+    public void stopPeekingMode() {
+        isCheating = false;
+        isReplay = false;
+        loadChessBoardFromStr(chessGame.get(chessGame.size()-1));
     }
 }
