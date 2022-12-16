@@ -7,6 +7,7 @@ import chessComponent.EmptySlotComponent;
 import model.ChessColor;
 import model.ChessboardPoint;
 import onlineMode.OnlinePlayMode;
+import soundPlayer.MusicPlayer;
 import view.ChessGameFrame;
 import view.Chessboard;
 
@@ -35,18 +36,21 @@ public class ClickController {
             if (first == null) {
                 if (handleFirst(cbPoint)) {
                     squareComponent.setSelected(true);
+                    MusicPlayer.chessSelect.play();
                     first = squareComponent;
                     first.repaint();
                 }
             } else {
                 if (first == squareComponent) { // 再次点击取消选取
                     squareComponent.setSelected(false);
+                    MusicPlayer.chessSelect.play();
                     SquareComponent recordFirst = first;
                     first = null;
                     recordFirst.repaint();
                 } else if (handleSecond(cbPoint)) {
                     //repaint in swap chess method.
                     chessboard.eatChessComponents(first, squareComponent);
+                    MusicPlayer.chessMove.play();
                     chessboard.clickController.swapPlayer();
                     if (!chessboard.isCheating) {
                         sendMyCB();
@@ -73,9 +77,9 @@ public class ClickController {
     private boolean handleFirst(ChessboardPoint point) {
         SquareComponent squareComponent = chessboard.getSquareComponents()[point.getX()][point.getY()];
         if (!squareComponent.isRevealed()) {
-//            loadYourCB();
             squareComponent = chessboard.getSquareComponents()[point.getX()][point.getY()];
             squareComponent.setRevealed(true);
+            MusicPlayer.chessMove.play();
             System.out.printf("onClick to reverse a chess [%d,%d]\n", squareComponent.getChessboardPoint().getX(), squareComponent.getChessboardPoint().getY());
             squareComponent.repaint();
             chessboard.clickController.swapPlayer();
