@@ -9,12 +9,11 @@ import java.awt.*;
 import java.io.*;
 import java.util.*;
 
-
 /**
  * 这个类表示棋盘组建，其包含：
  * SquareComponent[][]: 4*8个方块格子组件
  */
-public class Chessboard extends JComponent{
+public class Chessboard extends JComponent {
 
 
     public Chessboard(int width, int height) {
@@ -27,6 +26,7 @@ public class Chessboard extends JComponent{
         scoreOfRed = 0;
         initAllChessOnBoard();
     }
+
     // chessGame 用于记录所有的当前游戏的行棋步骤，执行initAllChessOnBoard时会初始化并且记录初始棋盘状态。
     public ArrayList<String> chessGame;
     private static final int ROW_SIZE = 8;
@@ -70,6 +70,7 @@ public class Chessboard extends JComponent{
     public int getScoreOfRed() {
         return scoreOfRed;
     }
+
     public SquareComponent[][] getChessComponents() {
         return squareComponents;
     }
@@ -92,185 +93,182 @@ public class Chessboard extends JComponent{
         }
         add(squareComponents[row][col] = squareComponent);
     }
+
     private final int[] deadNumOfBlack = new int[7];
     private final int[] deadNumOfRed = new int[7];
+
     // 设置死亡棋子数字标签的参数
     private void setDeadChessLabel(Graphics g) {
         g.setColor(Themes.deadChessLabelColor);
-        g.fillOval(5,5,15,15);
+        g.fillOval(5, 5, 15, 15);
         g.setColor(Color.WHITE);
         g.setFont(new Font("黑体", Font.BOLD, 10));
     }
+
     // 更新死掉的棋子并且绘制
     private void updateDeadChess(ChessColor color, int index) {
         if (index == 0) {
             SquareComponent deadChess;
-            if (color == ChessColor.RED){
-                deadChess = new GeneralChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
+            if (color == ChessColor.RED) {
+                deadChess = new GeneralChessComponent(new ChessboardPoint(index, 0), color, clickController, CHESS_SIZE) {
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
                         setDeadChessLabel(g);
-                        g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
+                        g.drawString(String.valueOf(deadNumOfRed[index]), 10, 16);
                     }
                 };
             } else {
-                deadChess = new GeneralChessComponent(new ChessboardPoint(7 - index,5), color, clickController, CHESS_SIZE) {
+                deadChess = new GeneralChessComponent(new ChessboardPoint(7 - index, 5), color, clickController, CHESS_SIZE) {
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
                         setDeadChessLabel(g);
-                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
+                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10, 16);
                     }
                 };
             }
             deadChess.setRevealed(true);
             putChessOnBoard(deadChess);
             deadChess.repaint();
-        }
-        else if (index == 1) {
+        } else if (index == 1) {
             SquareComponent deadChess;
-            if (color == ChessColor.RED){
-                deadChess = new AdvisorChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
+            if (color == ChessColor.RED) {
+                deadChess = new AdvisorChessComponent(new ChessboardPoint(index, 0), color, clickController, CHESS_SIZE) {
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
                         setDeadChessLabel(g);
-                        g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
+                        g.drawString(String.valueOf(deadNumOfRed[index]), 10, 16);
                     }
                 };
             } else {
-                deadChess = new AdvisorChessComponent(new ChessboardPoint(7 - index,5), color, clickController, CHESS_SIZE) {
+                deadChess = new AdvisorChessComponent(new ChessboardPoint(7 - index, 5), color, clickController, CHESS_SIZE) {
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
                         setDeadChessLabel(g);
-                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
+                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10, 16);
                     }
                 };
             }
             deadChess.setRevealed(true);
             putChessOnBoard(deadChess);
             deadChess.repaint();
-        }
-        else if (index == 2) {
+        } else if (index == 2) {
             SquareComponent deadChess;
-            if (color == ChessColor.RED){
-                deadChess = new MinisterChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
+            if (color == ChessColor.RED) {
+                deadChess = new MinisterChessComponent(new ChessboardPoint(index, 0), color, clickController, CHESS_SIZE) {
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
                         setDeadChessLabel(g);
-                        g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
+                        g.drawString(String.valueOf(deadNumOfRed[index]), 10, 16);
                     }
                 };
             } else {
-                deadChess = new MinisterChessComponent(new ChessboardPoint(7 - index,5), color, clickController, CHESS_SIZE) {
+                deadChess = new MinisterChessComponent(new ChessboardPoint(7 - index, 5), color, clickController, CHESS_SIZE) {
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
                         setDeadChessLabel(g);
-                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
+                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10, 16);
                     }
                 };
             }
             deadChess.setRevealed(true);
             putChessOnBoard(deadChess);
             deadChess.repaint();
-        }
-        else if (index == 3) {
+        } else if (index == 3) {
             SquareComponent deadChess;
-            if (color == ChessColor.RED){
-                deadChess = new ChariotChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
+            if (color == ChessColor.RED) {
+                deadChess = new ChariotChessComponent(new ChessboardPoint(index, 0), color, clickController, CHESS_SIZE) {
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
                         setDeadChessLabel(g);
-                        g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
+                        g.drawString(String.valueOf(deadNumOfRed[index]), 10, 16);
                     }
                 };
             } else {
-                deadChess = new ChariotChessComponent(new ChessboardPoint(7 - index,5), color, clickController, CHESS_SIZE) {
+                deadChess = new ChariotChessComponent(new ChessboardPoint(7 - index, 5), color, clickController, CHESS_SIZE) {
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
                         setDeadChessLabel(g);
-                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
+                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10, 16);
                     }
                 };
             }
             deadChess.setRevealed(true);
             putChessOnBoard(deadChess);
             deadChess.repaint();
-        }
-        else if (index == 4) {
+        } else if (index == 4) {
             SquareComponent deadChess;
-            if (color == ChessColor.RED){
-                deadChess = new HorseChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
+            if (color == ChessColor.RED) {
+                deadChess = new HorseChessComponent(new ChessboardPoint(index, 0), color, clickController, CHESS_SIZE) {
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
                         setDeadChessLabel(g);
-                        g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
+                        g.drawString(String.valueOf(deadNumOfRed[index]), 10, 16);
                     }
                 };
             } else {
-                deadChess = new HorseChessComponent(new ChessboardPoint(7 - index,5), color, clickController, CHESS_SIZE) {
+                deadChess = new HorseChessComponent(new ChessboardPoint(7 - index, 5), color, clickController, CHESS_SIZE) {
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
                         setDeadChessLabel(g);
-                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
+                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10, 16);
                     }
                 };
             }
             deadChess.setRevealed(true);
             putChessOnBoard(deadChess);
             deadChess.repaint();
-        }
-        else if (index == 5) {
+        } else if (index == 5) {
             SquareComponent deadChess;
-            if (color == ChessColor.RED){
-                deadChess = new CannonChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
+            if (color == ChessColor.RED) {
+                deadChess = new CannonChessComponent(new ChessboardPoint(index, 0), color, clickController, CHESS_SIZE) {
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
                         setDeadChessLabel(g);
-                        g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
+                        g.drawString(String.valueOf(deadNumOfRed[index]), 10, 16);
                     }
                 };
             } else {
-                deadChess = new CannonChessComponent(new ChessboardPoint(7 - index,5), color, clickController, CHESS_SIZE) {
+                deadChess = new CannonChessComponent(new ChessboardPoint(7 - index, 5), color, clickController, CHESS_SIZE) {
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
                         setDeadChessLabel(g);
-                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
+                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10, 16);
                     }
                 };
             }
             deadChess.setRevealed(true);
             putChessOnBoard(deadChess);
             deadChess.repaint();
-        }
-        else if (index == 6) {
+        } else if (index == 6) {
             SquareComponent deadChess;
-            if (color == ChessColor.RED){
-                deadChess = new SoldierChessComponent(new ChessboardPoint(index,0), color, clickController, CHESS_SIZE) {
+            if (color == ChessColor.RED) {
+                deadChess = new SoldierChessComponent(new ChessboardPoint(index, 0), color, clickController, CHESS_SIZE) {
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
                         setDeadChessLabel(g);
-                        g.drawString(String.valueOf(deadNumOfRed[index]), 10,16);
+                        g.drawString(String.valueOf(deadNumOfRed[index]), 10, 16);
                     }
                 };
             } else {
-                deadChess = new SoldierChessComponent(new ChessboardPoint(7 - index,5), color, clickController, CHESS_SIZE) {
+                deadChess = new SoldierChessComponent(new ChessboardPoint(7 - index, 5), color, clickController, CHESS_SIZE) {
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
                         setDeadChessLabel(g);
-                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10,16);
+                        g.drawString(String.valueOf(deadNumOfBlack[index]), 10, 16);
                     }
                 };
             }
@@ -279,30 +277,31 @@ public class Chessboard extends JComponent{
             deadChess.repaint();
         }
     }
+
     private void upDateDeadChessByKilling(SquareComponent chess2) {
         ChessComponent deadChess;
         if (chess2 instanceof GeneralChessComponent) {
             if (chess2.getChessColor() == ChessColor.RED) {
                 deadNumOfRed[0] += 1;
-                deadChess = new GeneralChessComponent(new ChessboardPoint(0, 0), ChessColor.RED, clickController, CHESS_SIZE){
+                deadChess = new GeneralChessComponent(new ChessboardPoint(0, 0), ChessColor.RED, clickController, CHESS_SIZE) {
                     @Override
-                    public void paintComponent(Graphics g){
+                    public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                        if (getChessboardPoint().getY() == 0 || getChessboardPoint().getY() == 5) {
                             setDeadChessLabel(g);
-                            g.drawString(String.valueOf(deadNumOfRed[0]), 10,16);
+                            g.drawString(String.valueOf(deadNumOfRed[0]), 10, 16);
                         }
                     }
                 };
             } else {
                 deadNumOfBlack[0] += 1;
-                deadChess = new GeneralChessComponent(new ChessboardPoint(7, 5), ChessColor.BLACK, clickController, CHESS_SIZE){
+                deadChess = new GeneralChessComponent(new ChessboardPoint(7, 5), ChessColor.BLACK, clickController, CHESS_SIZE) {
                     @Override
-                    public void paintComponent(Graphics g){
+                    public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                        if (getChessboardPoint().getY() == 0 || getChessboardPoint().getY() == 5) {
                             setDeadChessLabel(g);
-                            g.drawString(String.valueOf(deadNumOfBlack[0]), 10,16);
+                            g.drawString(String.valueOf(deadNumOfBlack[0]), 10, 16);
                         }
                     }
                 };
@@ -310,25 +309,25 @@ public class Chessboard extends JComponent{
         } else if (chess2 instanceof AdvisorChessComponent) {
             if (chess2.getChessColor() == ChessColor.RED) {
                 deadNumOfRed[1] += 1;
-                deadChess = new AdvisorChessComponent(new ChessboardPoint(0+1, 0), ChessColor.RED, clickController, CHESS_SIZE){
+                deadChess = new AdvisorChessComponent(new ChessboardPoint(0 + 1, 0), ChessColor.RED, clickController, CHESS_SIZE) {
                     @Override
-                    public void paintComponent(Graphics g){
+                    public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                        if (getChessboardPoint().getY() == 0 || getChessboardPoint().getY() == 5) {
                             setDeadChessLabel(g);
-                            g.drawString(String.valueOf(deadNumOfRed[1]), 10,16);
+                            g.drawString(String.valueOf(deadNumOfRed[1]), 10, 16);
                         }
                     }
                 };
             } else {
                 deadNumOfBlack[1] += 1;
-                deadChess = new AdvisorChessComponent(new ChessboardPoint(7-1, 5), ChessColor.BLACK, clickController, CHESS_SIZE){
+                deadChess = new AdvisorChessComponent(new ChessboardPoint(7 - 1, 5), ChessColor.BLACK, clickController, CHESS_SIZE) {
                     @Override
-                    public void paintComponent(Graphics g){
+                    public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                        if (getChessboardPoint().getY() == 0 || getChessboardPoint().getY() == 5) {
                             setDeadChessLabel(g);
-                            g.drawString(String.valueOf(deadNumOfBlack[1]), 10,16);
+                            g.drawString(String.valueOf(deadNumOfBlack[1]), 10, 16);
                         }
                     }
                 };
@@ -336,25 +335,25 @@ public class Chessboard extends JComponent{
         } else if (chess2 instanceof MinisterChessComponent) {
             if (chess2.getChessColor() == ChessColor.RED) {
                 deadNumOfRed[2] += 1;
-                deadChess = new MinisterChessComponent(new ChessboardPoint(0+2, 0), ChessColor.RED, clickController, CHESS_SIZE){
+                deadChess = new MinisterChessComponent(new ChessboardPoint(0 + 2, 0), ChessColor.RED, clickController, CHESS_SIZE) {
                     @Override
-                    public void paintComponent(Graphics g){
+                    public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                        if (getChessboardPoint().getY() == 0 || getChessboardPoint().getY() == 5) {
                             setDeadChessLabel(g);
-                            g.drawString(String.valueOf(deadNumOfRed[2]), 10,16);
+                            g.drawString(String.valueOf(deadNumOfRed[2]), 10, 16);
                         }
                     }
                 };
             } else {
                 deadNumOfBlack[2] += 1;
-                deadChess = new MinisterChessComponent(new ChessboardPoint(7-2, 5), ChessColor.BLACK, clickController, CHESS_SIZE){
+                deadChess = new MinisterChessComponent(new ChessboardPoint(7 - 2, 5), ChessColor.BLACK, clickController, CHESS_SIZE) {
                     @Override
-                    public void paintComponent(Graphics g){
+                    public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                        if (getChessboardPoint().getY() == 0 || getChessboardPoint().getY() == 5) {
                             setDeadChessLabel(g);
-                            g.drawString(String.valueOf(deadNumOfBlack[2]), 10,16);
+                            g.drawString(String.valueOf(deadNumOfBlack[2]), 10, 16);
                         }
                     }
                 };
@@ -362,25 +361,25 @@ public class Chessboard extends JComponent{
         } else if (chess2 instanceof ChariotChessComponent) {
             if (chess2.getChessColor() == ChessColor.RED) {
                 deadNumOfRed[3] += 1;
-                deadChess = new ChariotChessComponent(new ChessboardPoint(0+3, 0), ChessColor.RED, clickController, CHESS_SIZE){
+                deadChess = new ChariotChessComponent(new ChessboardPoint(0 + 3, 0), ChessColor.RED, clickController, CHESS_SIZE) {
                     @Override
-                    public void paintComponent(Graphics g){
+                    public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                        if (getChessboardPoint().getY() == 0 || getChessboardPoint().getY() == 5) {
                             setDeadChessLabel(g);
-                            g.drawString(String.valueOf(deadNumOfRed[3]), 10,16);
+                            g.drawString(String.valueOf(deadNumOfRed[3]), 10, 16);
                         }
                     }
                 };
             } else {
                 deadNumOfBlack[3] += 1;
-                deadChess = new ChariotChessComponent(new ChessboardPoint(7-3, 5), ChessColor.BLACK, clickController, CHESS_SIZE){
+                deadChess = new ChariotChessComponent(new ChessboardPoint(7 - 3, 5), ChessColor.BLACK, clickController, CHESS_SIZE) {
                     @Override
-                    public void paintComponent(Graphics g){
+                    public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                        if (getChessboardPoint().getY() == 0 || getChessboardPoint().getY() == 5) {
                             setDeadChessLabel(g);
-                            g.drawString(String.valueOf(deadNumOfBlack[3]), 10,16);
+                            g.drawString(String.valueOf(deadNumOfBlack[3]), 10, 16);
                         }
                     }
                 };
@@ -388,25 +387,25 @@ public class Chessboard extends JComponent{
         } else if (chess2 instanceof HorseChessComponent) {
             if (chess2.getChessColor() == ChessColor.RED) {
                 deadNumOfRed[4] += 1;
-                deadChess = new HorseChessComponent(new ChessboardPoint(0 + 4, 0), ChessColor.RED, clickController, CHESS_SIZE){
+                deadChess = new HorseChessComponent(new ChessboardPoint(0 + 4, 0), ChessColor.RED, clickController, CHESS_SIZE) {
                     @Override
-                    public void paintComponent(Graphics g){
+                    public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                        if (getChessboardPoint().getY() == 0 || getChessboardPoint().getY() == 5) {
                             setDeadChessLabel(g);
-                            g.drawString(String.valueOf(deadNumOfRed[4]), 10,16);
+                            g.drawString(String.valueOf(deadNumOfRed[4]), 10, 16);
                         }
                     }
                 };
             } else {
                 deadNumOfBlack[4] += 1;
-                deadChess = new HorseChessComponent(new ChessboardPoint(7 - 4, 5), ChessColor.BLACK, clickController, CHESS_SIZE){
+                deadChess = new HorseChessComponent(new ChessboardPoint(7 - 4, 5), ChessColor.BLACK, clickController, CHESS_SIZE) {
                     @Override
-                    public void paintComponent(Graphics g){
+                    public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                        if (getChessboardPoint().getY() == 0 || getChessboardPoint().getY() == 5) {
                             setDeadChessLabel(g);
-                            g.drawString(String.valueOf(deadNumOfBlack[4]), 10,16);
+                            g.drawString(String.valueOf(deadNumOfBlack[4]), 10, 16);
                         }
                     }
                 };
@@ -414,25 +413,25 @@ public class Chessboard extends JComponent{
         } else if (chess2 instanceof CannonChessComponent) {
             if (chess2.getChessColor() == ChessColor.RED) {
                 deadNumOfRed[5] += 1;
-                deadChess = new CannonChessComponent(new ChessboardPoint(0 + 5, 0), ChessColor.RED, clickController, CHESS_SIZE){
+                deadChess = new CannonChessComponent(new ChessboardPoint(0 + 5, 0), ChessColor.RED, clickController, CHESS_SIZE) {
                     @Override
-                    public void paintComponent(Graphics g){
+                    public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                        if (getChessboardPoint().getY() == 0 || getChessboardPoint().getY() == 5) {
                             setDeadChessLabel(g);
-                            g.drawString(String.valueOf(deadNumOfRed[5]), 10,16);
+                            g.drawString(String.valueOf(deadNumOfRed[5]), 10, 16);
                         }
                     }
                 };
             } else {
                 deadNumOfBlack[5] += 1;
-                deadChess = new CannonChessComponent(new ChessboardPoint(7 - 5, 5), ChessColor.BLACK, clickController, CHESS_SIZE){
+                deadChess = new CannonChessComponent(new ChessboardPoint(7 - 5, 5), ChessColor.BLACK, clickController, CHESS_SIZE) {
                     @Override
-                    public void paintComponent(Graphics g){
+                    public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                        if (getChessboardPoint().getY() == 0 || getChessboardPoint().getY() == 5) {
                             setDeadChessLabel(g);
-                            g.drawString(String.valueOf(deadNumOfBlack[5]), 10,16);
+                            g.drawString(String.valueOf(deadNumOfBlack[5]), 10, 16);
                         }
                     }
                 };
@@ -440,25 +439,25 @@ public class Chessboard extends JComponent{
         } else {
             if (chess2.getChessColor() == ChessColor.RED) {
                 deadNumOfRed[6] += 1;
-                deadChess = new SoldierChessComponent(new ChessboardPoint(0 + 6, 0), ChessColor.RED, clickController, CHESS_SIZE){
+                deadChess = new SoldierChessComponent(new ChessboardPoint(0 + 6, 0), ChessColor.RED, clickController, CHESS_SIZE) {
                     @Override
-                    public void paintComponent(Graphics g){
+                    public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                        if (getChessboardPoint().getY() == 0 || getChessboardPoint().getY() == 5) {
                             setDeadChessLabel(g);
-                            g.drawString(String.valueOf(deadNumOfRed[6]), 10,16);
+                            g.drawString(String.valueOf(deadNumOfRed[6]), 10, 16);
                         }
                     }
                 };
             } else {
                 deadNumOfBlack[6] += 1;
-                deadChess = new SoldierChessComponent(new ChessboardPoint(7 - 6, 5), ChessColor.BLACK, clickController, CHESS_SIZE){
+                deadChess = new SoldierChessComponent(new ChessboardPoint(7 - 6, 5), ChessColor.BLACK, clickController, CHESS_SIZE) {
                     @Override
-                    public void paintComponent(Graphics g){
+                    public void paintComponent(Graphics g) {
                         super.paintComponent(g);
-                        if (getChessboardPoint().getY()==0 || getChessboardPoint().getY()==5) {
+                        if (getChessboardPoint().getY() == 0 || getChessboardPoint().getY() == 5) {
                             setDeadChessLabel(g);
-                            g.drawString(String.valueOf(deadNumOfBlack[6]), 10,16);
+                            g.drawString(String.valueOf(deadNumOfBlack[6]), 10, 16);
                         }
                     }
                 };
@@ -471,6 +470,7 @@ public class Chessboard extends JComponent{
 
     /**
      * 交换chess1 chess2的位置
+     *
      * @param chess1 吃棋动作发起方
      * @param chess2 被吃的目标
      */
@@ -482,6 +482,7 @@ public class Chessboard extends JComponent{
             upDateDeadChessByKilling(chess2);
             add(chess2 = new EmptySlotComponent(chess2.getChessboardPoint(), clickController, CHESS_SIZE));
         }
+        ///
         chess1.swapLocation(chess2);
         int row1 = chess1.getChessboardPoint().getX(), col1 = chess1.getChessboardPoint().getY();
         squareComponents[row1][col1] = chess1;
@@ -494,6 +495,7 @@ public class Chessboard extends JComponent{
         System.out.printf("Black's score: %d\n", scoreOfBlack);
         System.out.printf("Red's score: %d\n", scoreOfRed);
     }
+
     // 用于棋盘打乱
     public int[] indexShuffle(int[] index_i) {
         Random rand = new Random();
@@ -501,11 +503,12 @@ public class Chessboard extends JComponent{
         for (int i = index.length; i > 0; i--) {
             int randInt = rand.nextInt(i);
             int temp = index[randInt];
-            index[randInt] = index[i-1];
-            index[i-1] = temp;
+            index[randInt] = index[i - 1];
+            index[i - 1] = temp;
         }
         return index;
     }
+
     // 用于作为indexShuffle的arg
     public int[] arange(int size) {
         int[] res = new int[size];
@@ -514,6 +517,7 @@ public class Chessboard extends JComponent{
         }
         return res;
     }
+
     public void repaintAll() {
         for (int i = 0; i < ROW_SIZE; i++) {
             for (int j = 0; j < COL_SIZE; j++) {
@@ -522,6 +526,7 @@ public class Chessboard extends JComponent{
         }
         this.repaint();
     }
+
     //FIXME:   Initialize chessboard.
     public void initAllChessOnBoard() {
         for (int i = 0; i < 7; i++) {
@@ -531,10 +536,10 @@ public class Chessboard extends JComponent{
         scoreOfBlack = 0;
         scoreOfRed = 0;
         currentColor = ChessColor.BLACK;
-        int[] elements_index = arange(4*8);
+        int[] elements_index = arange(4 * 8);
         int[] random_index = indexShuffle(elements_index);
         int counter = 0;
-        int n_chess4one = 4*8/2;
+        int n_chess4one = 4 * 8 / 2;
         int n_soldiers = 5;
         int n_chariots = 2;
         int n_cannons = 2;
@@ -590,28 +595,30 @@ public class Chessboard extends JComponent{
 
     public static boolean isReplay = false;
     public static int replayStep = 0;
-    public void lastStep(){
-        if (replayStep>=1) {
+
+    public void lastStep() {
+        if (replayStep >= 1) {
             loadChessBoardFromStr(chessGame.get(replayStep - 1));
             replayStep -= 1;
         } else {
-            JOptionPane.showMessageDialog(null,"This is the first step", "Error",
+            JOptionPane.showMessageDialog(null, "This is the first step", "Error",
                     JOptionPane.WARNING_MESSAGE);
         }
     }
 
-    public void nextStep(){
-        if (replayStep<chessGame.size()-1) {
+    public void nextStep() {
+        if (replayStep < chessGame.size() - 1) {
             loadChessBoardFromStr(chessGame.get(replayStep + 1));
             replayStep += 1;
         } else {
-            JOptionPane.showMessageDialog(null,"This is the last step", "Error",
+            JOptionPane.showMessageDialog(null, "This is the last step", "Error",
                     JOptionPane.WARNING_MESSAGE);
         }
     }
 
     /**
      * 绘制棋盘格子
+     *
      * @param g 棋盘
      */
     @Override
@@ -623,6 +630,7 @@ public class Chessboard extends JComponent{
 
     /**
      * 将棋盘上行列坐标映射成Swing组件的Point
+     *
      * @param row 棋盘上的行
      * @param col 棋盘上的列
      */
@@ -637,11 +645,11 @@ public class Chessboard extends JComponent{
         chessGame = new ArrayList<>();
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(
-                    new FileInputStream(String.format("gamedata\\%s.txt",gameName)));
+                    new FileInputStream(String.format("gamedata\\%s.txt", gameName)));
             bufferedReader = new BufferedReader(inputStreamReader);
             String line;
             //按行读取
-            while((line = bufferedReader.readLine() )!= null && line.length()!=0){
+            while ((line = bufferedReader.readLine()) != null && line.length() != 0) {
                 //将按行读取的字符串按空格分割，得到一个string数组
                 //String[] strings = line.split("\\t");
                 //依次转换为int类型存入到分配好空间的数组中
@@ -650,13 +658,43 @@ public class Chessboard extends JComponent{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        loadChessBoardFromStr(chessGame.get(chessGame.size()-1));
+        loadChessBoardFromStr(chessGame.get(chessGame.size() - 1));
         clickController.sendMyCB();
     }
 
+    public static void RankingDataFile(String username) {
+        File file = new File("gamedata\\RankingData\\RankingData.txt");
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+        String str = "";
+        str = str + " " + username;
+        byte[] bytes = new byte[1024];
+        bytes = str.getBytes();
+        //写入
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(file, true);
+            try {
+                fileOutputStream.write(bytes, 0, bytes.length);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (
+                FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public void saveGame2File(String gameName) {
         FileWriter out;
-        File file = new File(String.format("gamedata\\%s.txt",gameName));
+        File file = new File(String.format("gamedata\\%s.txt", gameName));
         try {
             out = new FileWriter(file);
             for (String s : chessGame) {
@@ -670,44 +708,71 @@ public class Chessboard extends JComponent{
     }
 
     public void loadChessBoardFromStr(String str) {
-        if (str.length()!=163) {
-            JOptionPane.showMessageDialog(null,"Wrong chessboard.\nError code: 102",
-                    "Error", JOptionPane.WARNING_MESSAGE); initAllChessOnBoard(); updateFrameLabel(); return;
+        if (str.length() != 163) {
+            JOptionPane.showMessageDialog(null, "Wrong chessboard.\nError code: 102",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+            initAllChessOnBoard();
+            updateFrameLabel();
+            return;
         }
-        if (str.charAt(0)=='B') {setCurrentColor(ChessColor.BLACK);}
-        else if (str.charAt(0)=='R') {setCurrentColor(ChessColor.RED);}
-        else {JOptionPane.showMessageDialog(null,"Missing chess player.\nError code: 104",
-                "Error", JOptionPane.WARNING_MESSAGE); initAllChessOnBoard(); updateFrameLabel(); return;}
-        setScoreOfBlack(Integer.parseInt(str.substring(1,3)));
-        setScoreOfRed(Integer.parseInt(str.substring(3,5)));
-        for (int i = 0; i < ROW_SIZE*COL_SIZE; i++) {
+        if (str.charAt(0) == 'B') {
+            setCurrentColor(ChessColor.BLACK);
+        } else if (str.charAt(0) == 'R') {
+            setCurrentColor(ChessColor.RED);
+        } else {
+            JOptionPane.showMessageDialog(null, "Missing chess player.\nError code: 104",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+            initAllChessOnBoard();
+            updateFrameLabel();
+            return;
+        }
+        setScoreOfBlack(Integer.parseInt(str.substring(1, 3)));
+        setScoreOfRed(Integer.parseInt(str.substring(3, 5)));
+        for (int i = 0; i < ROW_SIZE * COL_SIZE; i++) {
             ChessColor color;
             String substr;
-            int j = i/COL_SIZE;
-            int k = i%COL_SIZE;
-            substr = str.substring(5+3*i,5+3*i+3);
+            int j = i / COL_SIZE;
+            int k = i % COL_SIZE;
+            substr = str.substring(5 + 3 * i, 5 + 3 * i + 3);
             boolean isRev;
             isRev = !Objects.equals(substr.charAt(2), '0');
-            if (substr.charAt(0)=='B') {color = ChessColor.BLACK;}
-            else if (substr.charAt(0)=='R') {color = ChessColor.RED;}
-            else if (substr.charAt(0)=='N') {color = ChessColor.NONE;}
-            else {
-                JOptionPane.showMessageDialog(null,"Wrong chess piece.\nError code: 103",
-                        "Error", JOptionPane.WARNING_MESSAGE); initAllChessOnBoard(); updateFrameLabel(); return;
+            if (substr.charAt(0) == 'B') {
+                color = ChessColor.BLACK;
+            } else if (substr.charAt(0) == 'R') {
+                color = ChessColor.RED;
+            } else if (substr.charAt(0) == 'N') {
+                color = ChessColor.NONE;
+            } else {
+                JOptionPane.showMessageDialog(null, "Wrong chess piece.\nError code: 103",
+                        "Error", JOptionPane.WARNING_MESSAGE);
+                initAllChessOnBoard();
+                updateFrameLabel();
+                return;
             }
             SquareComponent squareComponent;
             switch (substr.charAt(1)) {
-                case 'c' -> squareComponent = new ChariotChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                case 'm' -> squareComponent = new HorseChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                case 'x' -> squareComponent = new MinisterChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                case 's' -> squareComponent = new AdvisorChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                case 'j' -> squareComponent = new GeneralChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                case 'z' -> squareComponent = new SoldierChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                case 'p' -> squareComponent = new CannonChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
-                case 'e' -> squareComponent = new EmptySlotComponent(new ChessboardPoint(j,k), clickController, CHESS_SIZE);
+                case 'c' ->
+                        squareComponent = new ChariotChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
+                case 'm' ->
+                        squareComponent = new HorseChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
+                case 'x' ->
+                        squareComponent = new MinisterChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
+                case 's' ->
+                        squareComponent = new AdvisorChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
+                case 'j' ->
+                        squareComponent = new GeneralChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
+                case 'z' ->
+                        squareComponent = new SoldierChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
+                case 'p' ->
+                        squareComponent = new CannonChessComponent(new ChessboardPoint(j, k), color, clickController, CHESS_SIZE);
+                case 'e' ->
+                        squareComponent = new EmptySlotComponent(new ChessboardPoint(j, k), clickController, CHESS_SIZE);
                 default -> {
-                    JOptionPane.showMessageDialog(null,"Wrong chess piece.\nError code: 103",
-                            "Error", JOptionPane.WARNING_MESSAGE); initAllChessOnBoard(); updateFrameLabel(); return;
+                    JOptionPane.showMessageDialog(null, "Wrong chess piece.\nError code: 103",
+                            "Error", JOptionPane.WARNING_MESSAGE);
+                    initAllChessOnBoard();
+                    updateFrameLabel();
+                    return;
                 }
             }
             squareComponent.setRevealed(isRev);
@@ -716,8 +781,8 @@ public class Chessboard extends JComponent{
             squareComponent.repaint();
         }
         for (int i = 0; i < 7; i++) {
-            deadNumOfBlack[i] = Integer.parseInt(str.substring(str.length()-14+i,str.length()-13+i));
-            deadNumOfRed[i] = Integer.parseInt(str.substring(str.length()-7+i,str.length()-6+i));
+            deadNumOfBlack[i] = Integer.parseInt(str.substring(str.length() - 14 + i, str.length() - 13 + i));
+            deadNumOfRed[i] = Integer.parseInt(str.substring(str.length() - 7 + i, str.length() - 6 + i));
             if (deadNumOfBlack[i] != 0) {
                 updateDeadChess(ChessColor.BLACK, i);
             }
@@ -727,22 +792,26 @@ public class Chessboard extends JComponent{
         }
         updateFrameLabel();
     }
+
     public void updateFrameLabel() {
         ChessGameFrame.getStatusLabel().setText(String.format("%s's TURN", this.getCurrentColor().getName()));
         ChessGameFrame.getRedScoreLabel().setText(String.format("RED's SCORE: %d", this.getScoreOfRed()));
         ChessGameFrame.getBlackScoreLabel().setText(String.format("BLACK's SCORE: %d", this.getScoreOfBlack()));
     }
+
     public String saveChessBoard2Str() {
         StringBuilder str = new StringBuilder();
         str.append(getCurrentColor().toString().charAt(0));
-        if (getScoreOfBlack()>=10) {
+        if (getScoreOfBlack() >= 10) {
             str.append(String.format("%d", getScoreOfBlack()));
         } else {
-            str.append(String.format("0%d", getScoreOfBlack()));}
-        if (getScoreOfRed()>=10) {
+            str.append(String.format("0%d", getScoreOfBlack()));
+        }
+        if (getScoreOfRed() >= 10) {
             str.append(String.format("%d", getScoreOfRed()));
         } else {
-            str.append(String.format("0%d", getScoreOfRed()));}
+            str.append(String.format("0%d", getScoreOfRed()));
+        }
 
         for (SquareComponent[] squareComponent : squareComponents) {
             for (SquareComponent component : squareComponent) {
@@ -756,35 +825,38 @@ public class Chessboard extends JComponent{
                         component.getCode(), isRevealed10));
             }
         }
-        for (int num: deadNumOfBlack) {
+        for (int num : deadNumOfBlack) {
             str.append(num);
         }
-        for (int num: deadNumOfRed) {
+        for (int num : deadNumOfRed) {
             str.append(num);
         }
         return str.toString();
     }
 
     public void undo1step() {
-        if (chessGame.size()>1) {
-            chessGame.remove(chessGame.size()-1);
-            loadChessBoardFromStr(chessGame.get(chessGame.size()-1));
+        if (chessGame.size() > 1) {
+            chessGame.remove(chessGame.size() - 1);
+            loadChessBoardFromStr(chessGame.get(chessGame.size() - 1));
             clickController.sendMyCB();
         } else {
             JOptionPane.showMessageDialog(
-                    null, "Cannot undo on a initial state.","Warning",
+                    null, "Cannot undo on a initial state.", "Warning",
                     JOptionPane.WARNING_MESSAGE
             );
         }
     }
+
     public boolean isCheating = false;
+
     public void enablePeekingMode() {
         isCheating = true;
         isReplay = true; // isReplay==true 时，任何行动不会实质性地改变游戏
     }
+
     public void stopPeekingMode() {
         isCheating = false;
         isReplay = false;
-        loadChessBoardFromStr(chessGame.get(chessGame.size()-1));
+        loadChessBoardFromStr(chessGame.get(chessGame.size() - 1));
     }
 }

@@ -30,7 +30,7 @@ public class ClickController {
 
     public void onClick(ChessboardPoint cbPoint) {
         //判断第一次点击
-        if (cbPoint.getY()!=0 && cbPoint.getY()!=5) {
+        if (cbPoint.getY() != 0 && cbPoint.getY() != 5) {
             SquareComponent squareComponent = chessboard.getSquareComponents()[cbPoint.getX()][cbPoint.getY()];
             if (first == null) {
                 if (handleFirst(cbPoint)) {
@@ -48,7 +48,9 @@ public class ClickController {
                     //repaint in swap chess method.
                     chessboard.eatChessComponents(first, squareComponent);
                     chessboard.clickController.swapPlayer();
-                    if(!chessboard.isCheating) {sendMyCB();}
+                    if (!chessboard.isCheating) {
+                        sendMyCB();
+                    }
                     if (!Chessboard.isReplay) {
                         chessboard.chessGame.add(chessboard.saveChessBoard2Str());
                     }
@@ -77,7 +79,9 @@ public class ClickController {
             System.out.printf("onClick to reverse a chess [%d,%d]\n", squareComponent.getChessboardPoint().getX(), squareComponent.getChessboardPoint().getY());
             squareComponent.repaint();
             chessboard.clickController.swapPlayer();
-            if(!chessboard.isCheating){sendMyCB();}
+            if (!chessboard.isCheating) {
+                sendMyCB();
+            }
             if (!Chessboard.isReplay) {
                 chessboard.chessGame.add(chessboard.saveChessBoard2Str());
             }
@@ -122,32 +126,61 @@ public class ClickController {
     }
 
     public void gameOverAndAsk() {
-        String[] options = {"Play Again","Exit Game"};
+        String[] options = {"Play Again", "Exit Game", "Record the winner"};
         ImageIcon win = new ImageIcon("icons\\win.png");
         if (chessboard.getScoreOfBlack() >= 60) {
-            int userChoose =  JOptionPane.showOptionDialog(null,"BLACK WON!",
-                    "GAME OVER",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,
-                    win,options,options[0]);
+            int userChoose = JOptionPane.showOptionDialog(null, "BLACK WON!",
+                    "GAME OVER", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                    win, options, options[0]);
             System.out.println("BLACK WIN!");
             if (userChoose == 0) {
                 chessboard.initAllChessOnBoard();
                 ChessGameFrame.getRedScoreLabel().setText("RED's SCORE: 0");
                 ChessGameFrame.getBlackScoreLabel().setText("BLACK's SCORE: 0");
-            } else {System.exit(0);}
+            } else if ((userChoose == 1)) {
+                System.exit(0);
+            } else if (userChoose == 2) {
+                System.out.println("Click Record button");
+                String username = (String) JOptionPane.showInputDialog(null,
+                        "Please enter winner's  name:", "Record the winner", JOptionPane.PLAIN_MESSAGE, null, null, null);
+                if (username.length() == 0) {
+                    JOptionPane.showMessageDialog(null,
+                            "winner's name cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    Chessboard.RankingDataFile(username);
+                }
+                chessboard.initAllChessOnBoard();
+                ChessGameFrame.getRedScoreLabel().setText("RED's SCORE: 0");
+                ChessGameFrame.getBlackScoreLabel().setText("BLACK's SCORE: 0");
+            }
         } else if (chessboard.getScoreOfRed() >= 60) {
             //JOptionPane.showMessageDialog(null, "RED WIN!", "GAME OVER", JOptionPane.PLAIN_MESSAGE);
-            int userChoose =  JOptionPane.showOptionDialog(null,"RED WON!",
-                    "GAME OVER",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,
-                    win,options,options[0]);		//选择对话框*/
+            int userChoose = JOptionPane.showOptionDialog(null, "RED WON!",
+                    "GAME OVER", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                    win, options, options[0]);        //选择对话框*/
             // JOptionPane.showMessageDialog(null, "BLACK WIN!", "GAME OVER", JOptionPane.PLAIN_MESSAGE);
             System.out.println("RED WIN!");
             if (userChoose == 0) {
                 chessboard.initAllChessOnBoard();
                 ChessGameFrame.getRedScoreLabel().setText("RED's SCORE: 0");
                 ChessGameFrame.getBlackScoreLabel().setText("BLACK's SCORE: 0");
-            } else {{System.exit(0);}}
-            System.out.println("RED WIN!");
+            } else if ((userChoose == 1)) {
+                System.exit(0);
+            } else if (userChoose == 2) {
+                System.out.println("Click Record button");
+                String name = (String) JOptionPane.showInputDialog(null,
+                        "Please enter winner's  name:", "Record the winner", JOptionPane.PLAIN_MESSAGE, null, null, null);
+                if (name.length() == 0) {
+                    JOptionPane.showMessageDialog(null,
+                            "winner's name cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    Chessboard.RankingDataFile(name);
+                }
+                chessboard.initAllChessOnBoard();
+                ChessGameFrame.getRedScoreLabel().setText("RED's SCORE: 0");
+                ChessGameFrame.getBlackScoreLabel().setText("BLACK's SCORE: 0");
+            }
         }
     }
-
 }
+

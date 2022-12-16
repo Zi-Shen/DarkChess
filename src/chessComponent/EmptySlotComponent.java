@@ -12,9 +12,7 @@ public class EmptySlotComponent extends SquareComponent {
     public EmptySlotComponent(ChessboardPoint chessboardPoint, ClickController listener, int size) {
         super(chessboardPoint, ChessColor.NONE, listener, size);
     }
-
-//    @Override
 //    public boolean canMoveTo(SquareComponent[][] chessboard, ChessboardPoint destination) {
 //        return false;
-//    }
+//   }
 }
