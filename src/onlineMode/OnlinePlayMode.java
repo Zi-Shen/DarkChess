@@ -3,6 +3,7 @@ import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.util.Objects;
 
+import soundPlayer.MusicPlayer;
 import view.Chessboard;
 
 public class OnlinePlayMode {
@@ -40,6 +41,7 @@ public class OnlinePlayMode {
                     super.action();
                     String old_str = chessboard.saveChessBoard2Str();
                     if (str.length()!=0 && !Objects.equals(old_str, str)) {
+                        MusicPlayer.chessMove.play();
                         chessboard.loadChessBoardFromStr(str);
                         chessboard.chessGame.add(str);
                         if (chessboard.getScoreOfBlack()>=60||chessboard.getScoreOfRed()>=60){
