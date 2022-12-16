@@ -3,6 +3,7 @@ package view;
 import chessComponent.*;
 import model.*;
 import controller.ClickController;
+import soundPlayer.MusicPlayer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -529,6 +530,7 @@ public class Chessboard extends JComponent {
 
     //FIXME:   Initialize chessboard.
     public void initAllChessOnBoard() {
+        MusicPlayer.init.play();
         for (int i = 0; i < 7; i++) {
             deadNumOfRed[i] = 0;
             deadNumOfBlack[i] = 0;

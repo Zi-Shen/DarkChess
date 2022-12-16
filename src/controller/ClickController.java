@@ -63,6 +63,8 @@ public class ClickController {
                     if (chessboard.getScoreOfBlack() >= 60 || chessboard.getScoreOfRed() >= 60) {
                         gameOverAndAsk();
                     }
+                } else {
+                    MusicPlayer.wrongMove.setVolumn(0.2f).play();
                 }
             }
         }
@@ -130,6 +132,7 @@ public class ClickController {
     }
 
     public void gameOverAndAsk() {
+        MusicPlayer.win.play();
         String[] options = {"Play Again", "Exit Game", "Record the winner"};
         ImageIcon win = new ImageIcon("icons\\win.png");
         if (chessboard.getScoreOfBlack() >= 60) {

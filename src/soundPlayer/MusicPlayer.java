@@ -22,6 +22,9 @@ public class MusicPlayer {
     private PlayThread playThread;
     public static MusicPlayer chessSelect = new MusicPlayer("sounds\\chessSelect.wav");
     public static MusicPlayer chessMove = new MusicPlayer("sounds\\chessMove.wav");
+    public static MusicPlayer init = new MusicPlayer("sounds\\init.wav");
+    public static MusicPlayer win = new MusicPlayer("sounds\\win.wav");
+    public static MusicPlayer wrongMove = new MusicPlayer("sounds\\wrongMove.wav");
     public MusicPlayer(String srcPath) {
         file = new File(srcPath);
     }
