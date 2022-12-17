@@ -2,8 +2,6 @@ package onlineMode;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 import java.util.Objects;
-
-import soundPlayer.MusicPlayer;
 import view.Chessboard;
 
 public class OnlinePlayMode {
@@ -11,7 +9,6 @@ public class OnlinePlayMode {
     public final int targetPort;
     public final int serverPort;
     public Chessboard chessboard;
-    public Thread thread_sed;
     public Thread thread_rec;
     public OnlinePlayMode (String ip1, int targetPort1, int serverPort, Chessboard chessboard) {
         this.ip = ip1;
