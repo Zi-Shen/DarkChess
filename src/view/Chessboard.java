@@ -782,6 +782,7 @@ public class Chessboard extends JComponent {
             putChessOnBoard(squareComponent);
             squareComponent.repaint();
         }
+        MusicPlayer.chessMove.play();
         for (int i = 0; i < 7; i++) {
             deadNumOfBlack[i] = Integer.parseInt(str.substring(str.length() - 14 + i, str.length() - 13 + i));
             deadNumOfRed[i] = Integer.parseInt(str.substring(str.length() - 7 + i, str.length() - 6 + i));
