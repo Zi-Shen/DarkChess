@@ -285,7 +285,7 @@ public class ChessGameFrame extends JFrame {
 
         loadButton.addActionListener(e -> {
             System.out.println("Click load");
-            String[] options = getFileListFromPath("gamedata\\");
+            String[] options = getFileListFromPath("gamedata\\SavedGame\\");
             ImageIcon hello = new ImageIcon("icons\\load.png");
             String option = (String) JOptionPane.showInputDialog(null, "Please choose a game",
                     "Load Game", JOptionPane.QUESTION_MESSAGE, hello, options, options[0]);

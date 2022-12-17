@@ -647,7 +647,7 @@ public class Chessboard extends JComponent {
         chessGame = new ArrayList<>();
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(
-                    new FileInputStream(String.format("gamedata\\%s.txt", gameName)));
+                    new FileInputStream(String.format("gamedata\\SavedGame\\%s.txt", gameName)));
             bufferedReader = new BufferedReader(inputStreamReader);
             String line;
             //按行读取
@@ -696,7 +696,7 @@ public class Chessboard extends JComponent {
 
     public void saveGame2File(String gameName) {
         FileWriter out;
-        File file = new File(String.format("gamedata\\%s.txt", gameName));
+        File file = new File(String.format("gamedata\\SavedGame\\%s.txt", gameName));
         try {
             out = new FileWriter(file);
             for (String s : chessGame) {
